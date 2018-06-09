@@ -21,21 +21,20 @@ public class Departamentos implements AreaDeTrabajo {
     public void setPersonal(Empleo trabajador) {
         
     }
-
-    @Override
-    public void setNombre(String nombre) {
-        
-    }
-
+    
     @Override
     public ArrayList getPersonal() {
         return null;
+    }
+    @Override
+    public void setNombre(String nombre) {
+        this.Nombre=nombre;
         
     }
 
     @Override
     public String getNombre() {
-        return null;
+        return this.Nombre;
         
     }
     

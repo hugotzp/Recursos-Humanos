@@ -12,26 +12,29 @@ import java.util.ArrayList;
  * @author Edwin Chocoy
  */
 public interface Empleo {
+    
     /**
      *
      * @param salario
      */
     public void setSalario(float salario);
+    
+    public float getSalario();
+    
     /**
      *
      * @param nombre
      */
     public void setNombre(String nombre);
+    
+    public String getNombre();
+    
     /**
      *
      * @param persona
      */
     public void setPersona(Persona persona);
-    
-    public void getSalario();
-    
-    public void getNombre();
-    
+
     public Persona getPersona();
     
     public ArrayList obtenerInformacion();

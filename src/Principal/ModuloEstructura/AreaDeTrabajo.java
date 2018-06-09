@@ -12,18 +12,20 @@ import java.util.ArrayList;
  * @author Edwin Chocoy
  */
 public interface AreaDeTrabajo {
+    
     /**
      *
      * @param trabajador
      */
     public void setPersonal(Empleo trabajador);
+    
+    public ArrayList getPersonal();
+    
     /**
      *
      * @param nombre
      */
     public void setNombre(String nombre);
-    
-    public ArrayList getPersonal();
     
     public String getNombre();
     

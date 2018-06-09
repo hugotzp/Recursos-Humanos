@@ -18,43 +18,48 @@ public interface Persona {
      * @param nombre
      */
     public void setNombre(String nombre);
+    
+    public String getNombre();
+    
     /**
      *
      * @param apellido
      */
     public void setApellido(String apellido);
+    
+    public String getApellido();
+    
     /**
      *
      * @param dpi
      */
     public void setDPI(String dpi);
+    
+    public String getDPI();
+    
     /**
      *
      * @param genero
      */
-    public void setGenero(Boolean genero);
+    public void setGenero(boolean genero);
+    
+    public boolean getGenero();
+    
     /**
      *
      * @param fecha
      */
     public void setFechaNacimiento(Date fecha);
+    
+    public Date getFechaNacimiento();
+    
     /**
      *
      * @param telefono
      */
     public void setNumeroTelefonico(String telefono);
     
-    public void getNombre();
-    
-    public void getApellido();
-    
-    public void getDPI();
-    
-    public void getGenero();
-    
-    public void getFechaNacimiento();
-    
-    public void getNumeroTelefonico();
+    public String getNumeroTelefonico();
     
     public int calcularEdad();
 }

@@ -21,38 +21,46 @@ public class Trabajador implements Empleo {
     
     @Override
     public void setSalario(float salario) {
+        this.Salario=salario;
         
     }
 
     @Override
     public void setNombre(String nombre) {
+        this.Nombre=nombre;
         
     }
 
     @Override
     public void setPersona(Persona persona) {
+        this.Persona=persona;
         
     }
 
     @Override
-    public void getSalario() {
+    public float getSalario() {
+        return this.Salario;
         
     }
 
     @Override
-    public void getNombre() {
+    public String getNombre() {
+        return this.Nombre;
         
     }
 
     @Override
     public Persona getPersona() {
-        return null;
+        return this.Persona;
         
     }
 
     @Override
     public ArrayList obtenerInformacion() {
-        return null;
+        
+        ArrayList informacion = null;
+        
+        return informacion;
         
     }
     

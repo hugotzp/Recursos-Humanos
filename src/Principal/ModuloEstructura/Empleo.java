@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ModuloContratacion;
+package Principal.ModuloEstructura;
 
 import java.util.ArrayList;
 
@@ -11,20 +11,29 @@ import java.util.ArrayList;
  *
  * @author Edwin Chocoy
  */
-public interface AreaDeTrabajo {
+public interface Empleo {
     /**
      *
-     * @param trabajador
+     * @param salario
      */
-    public void setPersonal(Empleo trabajador);
+    public void setSalario(float salario);
     /**
      *
      * @param nombre
      */
     public void setNombre(String nombre);
+    /**
+     *
+     * @param persona
+     */
+    public void setPersona(Persona persona);
     
-    public ArrayList getPersonal();
+    public void getSalario();
     
-    public String getNombre();
+    public void getNombre();
     
+    public Persona getPersona();
+    
+    public ArrayList obtenerInformacion();
+  
 }

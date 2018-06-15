@@ -9,6 +9,6 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface PrestacionesLaborales {
-    
+public interface Factory {
+    public VariacionSalarial crearObjeto(int tipo);
 }

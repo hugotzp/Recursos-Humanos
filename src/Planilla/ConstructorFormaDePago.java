@@ -9,6 +9,8 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface Descuento {
-    public void calcularTotal();
+public interface ConstructorFormaDePago {
+    public void setNumeroDocumento(String numero);
+    public void setCuentaEmpresa(String cuenta);
+    public void setCuentaEmpleado(String cuenta);
 }

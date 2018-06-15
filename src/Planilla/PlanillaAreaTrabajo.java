@@ -5,12 +5,16 @@
  */
 package Planilla;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Hugo
  */
 public interface PlanillaAreaTrabajo {
     public void setTipoPago(FormaDePago pago);
-    public float obtenerTotalPagar();
-    public void setPagoTrabajador(PagoTrabajador pago);
+    public void setPagoTrabajador(PagoTrabajador trabajador);
+    public FormaDePago getTipoPago();
+    public ArrayList<PagoTrabajador> getPagoTrabajadores();
+    public float obtenerTotalPagoPlanilla();
 }

@@ -5,14 +5,12 @@
  */
 package Planilla;
 
+import java.util.Hashtable;
+
 /**
  *
  * @author Hugo
  */
-public interface FormaDePago {
-    public boolean pagar();
-    public void setTotalPagar(float total);
-    public void setNumeroDocumento(String numero);
-    public float getTotalPagado();
-    public String getNumeroDocumento();
+public interface ConstructorVariacionSalarial {
+    public void setPropiedades(Hashtable propiedades);
 }

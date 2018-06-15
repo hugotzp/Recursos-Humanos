@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal.ModuloContratacion;
+package Contratacion;
 
 import java.util.Date;
 
@@ -11,31 +11,27 @@ import java.util.Date;
  *
  * @author Edwin Chocoy
  */
-public class Entrenamiento implements FaseReclutamiento {
+public class Reclutar implements Reclutamiento{
     
+    public Date fechaContratacion;
     public Date fechaInicio;
     public Date fechaFin;
-    public int desempeno;
-    public int rangoBajo;
-    public int rangoAlto;
-
+    public String Departamento;
+    
+    
     @Override
-    public void getTipoFase() {
+    public void compararAspirantes() {
         
     }
 
     @Override
-    public void getDesempeño() {
+    public void preseleccionarFinalistas() {
         
     }
 
     @Override
-    public void setRangoDesempeño(int bajo, int alto) {
-        this.rangoAlto=alto;
-        this.rangoBajo=bajo;
+    public void contratar() {
+        
     }
-    
-    
-    
     
 }

@@ -10,9 +10,8 @@ package Planilla;
  * @author Hugo
  */
 public interface PagoTrabajador {
-    public float calcularTotalAPagar();
-    public void setAumento(Aumento aumento);
+    public float getTotalAPagar();
+    public void setVariacionSalarial(VariacionSalarial variacion);
     public void setEmpleado(Empleo empleado);
-    public void setPrestacionesLaborales(PrestacionesLaborales prestacion);
-    public void setDescuentos(Descuento descuento);
+    void setTotalPagar(float total);
 }

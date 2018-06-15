@@ -9,12 +9,11 @@ package Planilla;
  *
  * @author Hugo
  */
-public class Comision implements Aumento{
-    float totalVenta;
-    float porcentaje;  
+public class FabricaVariacionesSalariales implements Factory{
+
     @Override
-    public float calcularTotal() {
-        return totalVenta * porcentaje;
+    public VariacionSalarial crearObjeto(int tipo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

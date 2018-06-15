@@ -9,6 +9,9 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface Aumento {
+public interface VariacionSalarial {
     public float calcularTotal();
+    public void setTipo(int tipo);
+    public int getTipo();
+    public Object getPropiedad(int tipo);
 }

@@ -1,21 +1,54 @@
+
+package Contratacion;
+
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Contratacion;
+
 
 /**
  *
  * @author Edwin Chocoy
  */
 public interface FaseReclutamiento {
+
+    /**
+     *
+     * @param fase
+     */
+    public void setNumeroFase(int fase);
     
+    /**
+     *
+     * @param valor
+     */
+    public void setPuntuacionDesempeño(int valor);
     
-    public void getTipoFase();
+    /**
+     *
+     * @param valor
+     */
+    public void setPuntuacionMaxima(int valor);
     
-    public void getDesempeño();
+    /**
+     *
+     * @param fecha
+     */
+    public void setFecha(Date fecha);
     
-    public void setRangoDesempeño(int bajo,int alto);
+    public int getNumeroFase();
     
+    public int getPuntuacionDesempeño();
+    
+    public int getPorcentajeDesempeño();
+    
+    public Date getFecha();
+    
+    public Object getPropiedad(int tipo);
+
+
 }

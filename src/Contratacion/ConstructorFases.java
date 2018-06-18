@@ -1,24 +1,28 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-*/
+ */
 package Contratacion;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public interface Reclutamiento {
+public class ConstructorFases {
     
-    public void compararAspirantes();
+    public MetodosConstructorFases fase;
     
-    public void preseleccionarFinalistas();
+    public void setConstructor(MetodosConstructorFases metodo){
+        
+    }
     
-    public void contratar();
+    public void construirFase(){
+        
+    }
     
-    public void setFaseReclutamiento(int numero);
+    public void getFase(){
+        
+    }
     
-
 }

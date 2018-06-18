@@ -10,7 +10,8 @@ package Planilla;
  * @author Hugo
  */
 public interface ConstructorFormaDePago {
-    public void setNumeroDocumento(String numero);
-    public void setCuentaEmpresa(String cuenta);
-    public void setCuentaEmpleado(String cuenta);
+    public void buildPart(int tipo, Object parte);
+    public void setFormaPago(FormaDePago pago);
+    public FormaDePago getFormaPago();
+    public void reset();
 }

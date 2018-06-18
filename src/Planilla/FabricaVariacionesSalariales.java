@@ -9,10 +9,10 @@ package Planilla;
  *
  * @author Hugo
  */
-public class FabricaVariacionesSalariales implements Factory{
+public class FabricaVariacionesSalariales implements FactoryVariacionesSalariales{
 
     @Override
-    public VariacionSalarial crearObjeto(int tipo) {
+    public ConstructorVariacionSalarial crearObjeto(int tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Planilla;
+package OtrasClases;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,7 @@ import java.util.ArrayList;
  *
  * @author Hugo
  */
-public interface PlanillaAreaTrabajo {
-    public void setPagoTrabajador(PagoTrabajador trabajador);
-    public ArrayList<PagoTrabajador> getPagoTrabajadores();
-    public float obtenerTotalPagoPlanilla();
+public interface Iterador {
+    public boolean hasMore();
+    public Object getNext();
 }

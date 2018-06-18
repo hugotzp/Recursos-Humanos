@@ -5,6 +5,9 @@
  */
 package Planilla;
 
+import OtrasClases.CreadorIterador;
+import OtrasClases.Iterador;
+import OtrasClases.IteradorPlanilla;
 import java.util.ArrayList;
 
 /**
@@ -13,28 +16,16 @@ import java.util.ArrayList;
  */
 public class PlanillaDepartamento implements PlanillaAreaTrabajo{
     String nombreSector;
-    FormaDePago TipoPago;
     ArrayList<PagoTrabajador> Trabajadores;
     
     public PlanillaDepartamento(String nombre, FormaDePago tipoPago){
         this.nombreSector = nombre;
-        this.TipoPago = tipoPago;
         this.Trabajadores = new ArrayList<>();
-    }
-
-    @Override
-    public void setTipoPago(FormaDePago pago) {
-        this.TipoPago = pago;
     }
 
     @Override
     public void setPagoTrabajador(PagoTrabajador trabajador) {
         this.Trabajadores.add(trabajador);
-    }
-
-    @Override
-    public FormaDePago getTipoPago() {
-        return this.TipoPago;
     }
 
     @Override
@@ -44,6 +35,12 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo{
 
     @Override
     public float obtenerTotalPagoPlanilla() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CreadorIterador creador = new CreadorIterador();
+        IteradorPlanilla planilla = creador.crearIteradorPlanilla();
+        float Total=0;
+        while(planilla.hasMore()){
+            Total += planilla.getNext().getTotalAPagar();
+        }
+        return Total;
     }
 }

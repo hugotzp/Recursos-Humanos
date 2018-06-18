@@ -5,12 +5,14 @@
  */
 package Planilla;
 
-import java.util.Hashtable;
 
 /**
  *
  * @author Hugo
  */
 public interface ConstructorVariacionSalarial {
-    public void setPropiedades(Hashtable propiedades);
+    public void buildPart(int tipo, Object objeto);
+    public void setVariacion(VariacionSalarial variacion);
+    public VariacionSalarial getVariacion();
+    public void reset();
 }

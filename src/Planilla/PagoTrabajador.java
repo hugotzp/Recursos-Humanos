@@ -13,5 +13,6 @@ public interface PagoTrabajador {
     public float getTotalAPagar();
     public void setVariacionSalarial(VariacionSalarial variacion);
     public void setEmpleado(Empleo empleado);
-    void setTotalPagar(float total);
+    public void setTotalPagar(float total);
+    public void calculartotalPagar();
 }

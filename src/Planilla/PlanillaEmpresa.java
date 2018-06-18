@@ -21,6 +21,10 @@ public class PlanillaEmpresa {
         this.Planillas = new ArrayList<>();
     }
     
+    public void setPlanilla(PlanillaAreaTrabajo planilla){
+        this.Planillas.add(planilla);
+    }
+    
     public void mostrarPlanilla(){
         
     }

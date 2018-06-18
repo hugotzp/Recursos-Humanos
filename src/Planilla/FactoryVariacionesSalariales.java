@@ -9,9 +9,6 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface FormaDePago {
-    public boolean pagar(float TotalPagar);
-    public void setNumeroDocumento(String numero);
-    public String getNumeroDocumento();
-    public Object getPropiedad(int tipo);
+public interface FactoryVariacionesSalariales {
+    public ConstructorVariacionSalarial crearObjeto(int tipo);
 }

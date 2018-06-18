@@ -5,14 +5,14 @@
  */
 package Planilla;
 
-import java.util.ArrayList;
 
 /**
  *
  * @author Hugo
  */
-public interface PlanillaAreaTrabajo {
-    public void setPagoTrabajador(PagoTrabajador trabajador);
-    public ArrayList<PagoTrabajador> getPagoTrabajadores();
-    public float obtenerTotalPagoPlanilla();
+public interface ConstructorVariacionSalarial {
+    public void buildPart(int tipo, Object objeto);
+    public void setVariacion(VariacionSalarial variacion);
+    public VariacionSalarial getVariacion();
+    public void reset();
 }

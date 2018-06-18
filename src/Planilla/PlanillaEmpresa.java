@@ -12,20 +12,24 @@ import java.util.Date;
  *
  * @author Hugo
  */
-public class Planilla {
+public class PlanillaEmpresa {
     Date fecha;
-    ArrayList<PlanillaAreaTrabajo> planillasAreasTrabajo;
-    public Planilla(Date fecha){
+    ArrayList<PlanillaAreaTrabajo> Planillas;
+    
+    public PlanillaEmpresa(Date fecha){
         this.fecha = fecha;
-        planillasAreasTrabajo = new ArrayList<PlanillaAreaTrabajo>();
+        this.Planillas = new ArrayList<>();
     }
     
-    public void agregarPlanilla(PlanillaAreaTrabajo planilla){
-        planillasAreasTrabajo.add(planilla);
+    public void setPlanilla(PlanillaAreaTrabajo planilla){
+        this.Planillas.add(planilla);
     }
     
     public void mostrarPlanilla(){
         
     }
     
+    public void pagarPlanilla(){
+        
+    }
 }

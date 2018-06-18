@@ -9,6 +9,6 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface Aumento {
-    public float calcularTotal();
+public interface FactoryVariacionesSalariales {
+    public ConstructorVariacionSalarial crearObjeto(int tipo);
 }

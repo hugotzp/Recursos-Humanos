@@ -1,4 +1,3 @@
-package Contratacion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,10 +5,11 @@ package Contratacion;
  * and open the template in the editor.
  */
 
+package Contratacion;
 
-import java.util.ArrayList;
+
 import java.util.Date;
-
+import java.util.ArrayList;
 /**
  *
  * @author Edwin Chocoy
@@ -20,6 +20,7 @@ public class Reclutar implements Reclutamiento{
     public Date fechaInicio;
     public Date fechaFin;
     public String Departamento;
+
     public ArrayList numeroFases;
     
     public PersonasInteresadas aspirante;
@@ -90,6 +91,7 @@ public class Reclutar implements Reclutamiento{
         return fabrica;
     }
 
+
     @Override
     public void compararAspirantes() {
         
@@ -105,10 +107,12 @@ public class Reclutar implements Reclutamiento{
         
     }
     
+
     @Override
     
     public void setFaseReclutamiento(int numero){
         this.numeroFases.add(numero);
     }
     
+
 }

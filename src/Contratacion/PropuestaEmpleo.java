@@ -1,3 +1,4 @@
+
 package Contratacion;
 
 /*
@@ -16,12 +17,14 @@ import java.util.ArrayList;
 public class PropuestaEmpleo implements Puesto{
     
     public String Puesto;
+
     public String Requisitos;
     public float Salario;
     public String Descripcion;
     
     
     @Override
+
     public void setNombre(String nombre) {
         this.Puesto=nombre;
     }
@@ -39,16 +42,20 @@ public class PropuestaEmpleo implements Puesto{
     @Override
     public String getDescripcion() {
         return Descripcion;
+
         
     }
 
     @Override
+
     public void setSalario(float valor) {
         this.Salario=valor;
+
     }
 
     @Override
     public float getSalario() {
+
         return Salario;
         
     }
@@ -62,6 +69,7 @@ public class PropuestaEmpleo implements Puesto{
     public String getRequisitos() {
         return Requisitos;
     }
+
     
     
     

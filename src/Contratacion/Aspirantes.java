@@ -1,3 +1,4 @@
+
 package Contratacion;
 
 /*
@@ -6,10 +7,10 @@ package Contratacion;
  * and open the template in the editor.
  */
 
-
 import java.util.ArrayList;
 import Estructura.Persona;
 import Estructura.Personal;
+
 
 /**
  *
@@ -19,6 +20,7 @@ public class Aspirantes implements PersonasInteresadas{
     
     public boolean enProceso;
     public float salarioEsperado;
+
     public ArrayList<FaseReclutamiento> fases = new ArrayList<FaseReclutamiento>();;
     public static Persona persona;
 
@@ -60,33 +62,38 @@ public class Aspirantes implements PersonasInteresadas{
     
     
     
-    
     @Override
     public void setTipoProceso(boolean tipo) {
+
         this.enProceso=tipo;
         
     }
 
     @Override
     public boolean getTipoProceso() {
+
         return enProceso;
+
         
     }
 
     @Override
     public void setFaseReclutamiento(FaseReclutamiento fase) {
+
         this.fases.add(fase);
+
     }
 
     @Override
     public ArrayList getFaseReclutamiento() {
         return fases;
+
         
     }
 
     @Override
     public int obtenerPromedioDesempeñoTotal() {
-        
+
         int promedio = 0;
         
         int totalfases=fases.size();
@@ -97,6 +104,8 @@ public class Aspirantes implements PersonasInteresadas{
         promedio=promedio/totalfases;
         
         return promedio;
+
+
         
     }
     

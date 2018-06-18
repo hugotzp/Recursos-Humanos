@@ -1,3 +1,4 @@
+
 package Contratacion;
 
 /*
@@ -6,14 +7,15 @@ package Contratacion;
  * and open the template in the editor.
  */
 
-
 import java.util.Date;
 import java.util.Hashtable;
+
 
 /**
  *
  * @author Edwin Chocoy
  */
+
 public class Entrevista implements FaseReclutamiento,MetodosConstructorFases{
 
     public Date fecha;
@@ -65,14 +67,15 @@ public class Entrevista implements FaseReclutamiento,MetodosConstructorFases{
     @Override
     public Object getPropiedad(int tipo) {
         return null;
+
+
         
     }
 
     @Override
+
     public void setPropiedades(Hashtable datos) {
         
     }
-    
 
-    
 }

@@ -1,3 +1,4 @@
+
 package Contratacion;
 
 /*
@@ -6,14 +7,16 @@ package Contratacion;
  * and open the template in the editor.
  */
 
-
 import java.util.Date;
 import java.util.Hashtable;
+
+
 
 /**
  *
  * @author Edwin Chocoy
  */
+
 public class Entrenamiento implements FaseReclutamiento,MetodosConstructorFases {
     
     public Date fechaInicio;
@@ -91,6 +94,7 @@ public class Entrenamiento implements FaseReclutamiento,MetodosConstructorFases 
             
         }
         return null;
+
         
     }
 
@@ -100,4 +104,5 @@ public class Entrenamiento implements FaseReclutamiento,MetodosConstructorFases 
     }
 
  
+
 }

@@ -1,3 +1,4 @@
+
 package Contratacion;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @author Edwin Chocoy
  */
 public interface FaseReclutamiento {
+
     /**
      *
      * @param fase
@@ -47,4 +49,6 @@ public interface FaseReclutamiento {
     public Date getFecha();
     
     public Object getPropiedad(int tipo);
+
+
 }

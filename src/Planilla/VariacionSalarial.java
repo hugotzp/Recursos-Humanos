@@ -9,12 +9,8 @@ package Planilla;
  *
  * @author Hugo
  */
-public class Comision implements Aumento{
-    float totalVenta;
-    float porcentaje;  
-    @Override
-    public float calcularTotal() {
-        return totalVenta * porcentaje;
-    }
-    
+public interface VariacionSalarial {
+    public float calcularTotal();
+    public Object getPropiedad(int tipo);
+    public float modificarSalario(float sueldoActual);
 }

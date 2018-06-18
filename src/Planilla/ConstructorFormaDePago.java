@@ -9,6 +9,9 @@ package Planilla;
  *
  * @author Hugo
  */
-public interface Descuento {
-    public void calcularTotal();
+public interface ConstructorFormaDePago {
+    public void buildPart(int tipo, Object parte);
+    public void setFormaPago(FormaDePago pago);
+    public FormaDePago getFormaPago();
+    public void reset();
 }

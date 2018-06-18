@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Planilla;
+package OtrasClases;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Hugo
  */
-public interface PrestacionesLaborales {
-    
+public interface Iterador {
+    public boolean hasMore();
+    public Object getNext();
 }

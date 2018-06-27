@@ -16,12 +16,12 @@ import Estructura.Personal;
  *
  * @author Edwin Chocoy
  */
-public class Aspirantes implements PersonasInteresadas{
+public class Aspirantes implements PersonasInteresadas,ColeccionIteradores{
     
     public boolean enProceso;
     public float salarioEsperado;
 
-    public ArrayList<FaseReclutamiento> fases = new ArrayList<FaseReclutamiento>();;
+    public ArrayList<FaseReclutamiento> fases;
     public static Persona persona;
 
     public Aspirantes(Persona p) {
@@ -36,9 +36,6 @@ public class Aspirantes implements PersonasInteresadas{
         this.salarioEsperado = salarioEsperado;
     }
 
-    public void setFases(ArrayList<FaseReclutamiento> fases) {
-        this.fases = fases;
-    }
 
     public void setPersona(Persona persona) {
         this.persona = persona;
@@ -50,10 +47,6 @@ public class Aspirantes implements PersonasInteresadas{
 
     public float getSalarioEsperado() {
         return salarioEsperado;
-    }
-
-    public ArrayList<FaseReclutamiento> getFases() {
-        return fases;
     }
 
     public Persona getPersona() {
@@ -78,35 +71,23 @@ public class Aspirantes implements PersonasInteresadas{
     }
 
     @Override
-    public void setFaseReclutamiento(FaseReclutamiento fase) {
+    public void setFasesReclutamiento(FaseReclutamiento fase) {
 
         this.fases.add(fase);
 
     }
 
     @Override
-    public ArrayList getFaseReclutamiento() {
+    public ArrayList getFasesReclutamiento() {
         return fases;
 
         
     }
 
     @Override
-    public int obtenerPromedioDesempeñoTotal() {
-
-        int promedio = 0;
-        
-        int totalfases=fases.size();
-        for(int i=0;i<=totalfases;i++){
-            promedio+=fases.get(i).getPorcentajeDesempeño();
-        }
-        
-        promedio=promedio/totalfases;
-        
-        return promedio;
-
-
-        
+    public Iterador crearIterador() {
+        return new IteradorFases(this);
     }
+
     
 }

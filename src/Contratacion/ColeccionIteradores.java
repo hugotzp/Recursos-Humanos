@@ -9,8 +9,8 @@ package Contratacion;
  *
  * @author Edwin Chocoy
  */
-public interface Factory {
+public interface ColeccionIteradores {
     
-    public FaseReclutamiento crearObjeto(int tipo);
+    public Iterador crearIterador();
     
 }

@@ -32,7 +32,6 @@ public class VentanaContratacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        balloonManager1 = new org.edisoncor.gui.util.BalloonManager();
         PanelFondo = new javax.swing.JPanel();
         PanelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -146,7 +145,7 @@ public class VentanaContratacion extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         PanelCentral.setLayout(new java.awt.CardLayout());
@@ -249,7 +248,7 @@ public class VentanaContratacion extends javax.swing.JFrame {
                     .addComponent(jTextFieldSalarioEAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(93, 93, 93)
                 .addComponent(jButtonGuardar)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         PanelCentral.add(PanelOpcion1, "card3");
@@ -334,7 +333,7 @@ public class VentanaContratacion extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButtonGuardarPropuesta)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         PanelCentral.add(PanelOpcion2, "card2");
@@ -386,7 +385,7 @@ public class VentanaContratacion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entrevista", jPanel1);
@@ -446,7 +445,7 @@ public class VentanaContratacion extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entrenamiento", jPanel2);
@@ -610,7 +609,6 @@ public class VentanaContratacion extends javax.swing.JFrame {
     private javax.swing.JPanel PanelOpcion2;
     private javax.swing.JPanel PanelOpcion3;
     private javax.swing.JPanel PanelOpciones;
-    private org.edisoncor.gui.util.BalloonManager balloonManager1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

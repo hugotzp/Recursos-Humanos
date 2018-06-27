@@ -25,7 +25,6 @@ public class Reclutar implements Reclutamiento{
     
     public PersonasInteresadas aspirante;
     public PropuestaEmpleo propuesta = new PropuestaEmpleo();
-    public FabricaFasesReclutamiento fabrica  = new FabricaFasesReclutamiento();
 
     public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
@@ -55,9 +54,6 @@ public class Reclutar implements Reclutamiento{
         this.propuesta = propuesta;
     }
 
-    public void setFabrica(FabricaFasesReclutamiento fabrica) {
-        this.fabrica = fabrica;
-    }
     
     public Date getFechaContratacion() {
         return fechaContratacion;
@@ -86,11 +82,6 @@ public class Reclutar implements Reclutamiento{
     public PropuestaEmpleo getPropuesta() {
         return propuesta;
     }
-
-    public FabricaFasesReclutamiento getFabrica() {
-        return fabrica;
-    }
-
 
     @Override
     public void compararAspirantes() {

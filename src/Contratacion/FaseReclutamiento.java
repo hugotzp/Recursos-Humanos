@@ -16,37 +16,26 @@ import java.util.Date;
  */
 public interface FaseReclutamiento {
 
-    /**
-     *
-     * @param fase
-     */
-    public void setNumeroFase(int fase);
+
+    public void setNumeroFase(int fase); 
     
-    /**
-     *
-     * @param valor
-     */
-    public void setPuntuacionDesempeño(int valor);
+    public void setNombreFase(String nombre);
+
+    public void setPuntuacionDesempeño(int valor);  
+
+    public void setFechaInicio(Date fecha);
     
-    /**
-     *
-     * @param valor
-     */
-    public void setPuntuacionMaxima(int valor);
-    
-    /**
-     *
-     * @param fecha
-     */
-    public void setFecha(Date fecha);
+    public void setFechaFin(Date fecha);
     
     public int getNumeroFase();
     
+    public String getNombreFase();
+    
     public int getPuntuacionDesempeño();
+        
+    public Date getFechaInicio();
     
-    public int getPorcentajeDesempeño();
-    
-    public Date getFecha();
+    public Date getFechaFin();
     
     public Object getPropiedad(int tipo);
 

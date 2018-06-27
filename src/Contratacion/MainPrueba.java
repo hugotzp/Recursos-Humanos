@@ -27,9 +27,7 @@ public class MainPrueba {
         PersonasInteresadas aspirante = new Aspirantes(persona);
         
         
-        System.out.println(aspirante);
-        Reclutamiento reclutar = new Reclutar();
-        Puesto propuesta = new PropuestaEmpleo();
+      
         
         
         

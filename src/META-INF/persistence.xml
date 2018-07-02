@@ -3,6 +3,7 @@
   <persistence-unit name="Recursos_HumanosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Personas.Personal</class>
+    <class>Personas.JpaController_Personal</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/base_rrhh?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="hugo"/>

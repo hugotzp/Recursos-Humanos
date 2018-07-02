@@ -6,19 +6,23 @@
 */
 package Contratacion;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Edwin Chocoy
  */
 public interface Reclutamiento {
     
-    public void compararAspirantes();
-    
-    public void preseleccionarFinalistas();
-    
     public void contratar();
     
     public void setFaseReclutamiento(int numero);
     
-
+    public void preseleccionarFinalistas();
+    
+    public Object obtenerFinalistas();
+    
+    public Object obtenerAspirantes();
+    
+    public void setEvaluacion(Evaluacion evaluacion);
 }

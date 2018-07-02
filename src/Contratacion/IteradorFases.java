@@ -22,8 +22,8 @@ public class IteradorFases implements Iterador {
     }
     
     @Override
-    public Object getNext() {
-        Object obj = null;
+    public FaseReclutamiento getNext() {
+        FaseReclutamiento obj = null;
         if( (this.posicionActual ) < this.fases.size() )
         {
             obj = this.fases.get(this.posicionActual);

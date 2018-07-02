@@ -9,11 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
-public interface IterableCollection {
-    
-    public Iterador createIteradorFase(ArrayList fase);
-    //public IteradorAspirantes createIteradorAspirantes(ArrayList aspirantes);
-    
+public interface FormaCalificar {
+    public ArrayList<Aspirantes> ejecutar();
 }

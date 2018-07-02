@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Edwin Chocoy
  */
-public class Reclutar implements Reclutamiento{
+public class Reclutar implements Reclutamiento,IterableCollection{
     
     public Date fechaContratacion;
     public Date fechaInicio;
@@ -23,9 +23,22 @@ public class Reclutar implements Reclutamiento{
 
     public ArrayList numeroFases;
     
-    public PersonasInteresadas aspirante;
-    public PropuestaEmpleo propuesta = new PropuestaEmpleo();
+    public ArrayList aspirantes;
+    public ArrayList finalistas;
+    public Puesto propuesta;
+    Evaluacion evaluar;
 
+    public Reclutar(Puesto propuesta) {
+        this.fechaContratacion = new Date();
+        this.fechaInicio = new Date();
+        this.fechaFin = new Date();
+        this.Departamento = "";
+        this.numeroFases = new ArrayList<Integer>();
+        this.propuesta = propuesta;
+    }
+
+    
+    
     public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
@@ -46,12 +59,12 @@ public class Reclutar implements Reclutamiento{
         this.numeroFases = numeroFases;
     }
 
-    public void setAspirante(PersonasInteresadas aspirante) {
-        this.aspirante = aspirante;
-    }
-
     public void setPropuesta(PropuestaEmpleo propuesta) {
         this.propuesta = propuesta;
+    }
+
+    public Evaluacion getEvaluar() {
+        return evaluar;
     }
 
     
@@ -75,35 +88,78 @@ public class Reclutar implements Reclutamiento{
         return numeroFases;
     }
 
-    public PersonasInteresadas getAspirante() {
-        return aspirante;
+    public ArrayList getAspirantes() {
+        return aspirantes;
     }
 
-    public PropuestaEmpleo getPropuesta() {
+    public ArrayList getFinalistas() {
+        return finalistas;
+    }
+
+    public Puesto getPropuesta() {
         return propuesta;
     }
 
+    public void setAspirantes(ArrayList aspirantes) {
+        this.aspirantes = aspirantes;
+    }
+
+    public void setFinalistas(ArrayList finalistas) {
+        this.finalistas = finalistas;
+    }
+
+    public void setPropuesta(Puesto propuesta) {
+        this.propuesta = propuesta;
+    }
+    
+    public void setAspirante(Aspirantes aspirante){
+        this.aspirantes.add(aspirante);
+    }
+
+    public void setFinalista(Aspirantes aspirante){
+        this.finalistas.add(finalistas);
+    }
+    
+    public void reset(){
+        aspirantes = new ArrayList<Aspirantes>();
+        finalistas = new ArrayList<Aspirantes>();
+    }
+    
+    
+
     @Override
-    public void compararAspirantes() {
-        
+    public void contratar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setFaseReclutamiento(int numero) {
+        this.numeroFases.add(numero);
     }
 
     @Override
     public void preseleccionarFinalistas() {
-        
+        finalistas = this.evaluar.seleccionarAspirantes();
     }
 
     @Override
-    public void contratar() {
-        
+    public Iterador obtenerFinalistas() {
+        return new IteradorAspirantes(finalistas);
     }
-    
 
     @Override
-    
-    public void setFaseReclutamiento(int numero){
-        this.numeroFases.add(numero);
+    public Iterador obtenerAspirantes() {
+        return new IteradorAspirantes(aspirantes);
+    }
+
+    @Override
+    public void setEvaluacion(Evaluacion evaluacion) {
+        this.evaluar = evaluacion;
+    }
+
+    @Override
+    public Iterador createIteradorFase(ArrayList fase) {
+        return new IteradorAspirantes(aspirantes);
     }
     
-
 }

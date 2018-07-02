@@ -5,8 +5,6 @@
  */
 package Estructura;
 
-
-import Personas.Persona;
 import java.util.ArrayList;
 
 /**

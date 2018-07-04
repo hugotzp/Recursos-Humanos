@@ -3,14 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructura;
+package EstructuraOrganizacional;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public interface PuestoTrabajador {
+public interface AreaDeTrabajo {
     
+    /**
+     *
+     * @param trabajador
+     */
+    public void setPersonal(Empleo trabajador);
+    
+    public ArrayList getPersonal();
+    
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre);
     
     public String getNombre();

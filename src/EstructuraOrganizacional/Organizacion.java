@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructura;
+package EstructuraOrganizacional;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  *
@@ -16,10 +15,9 @@ public class Organizacion {
     
     public String Nombre;
     public String TipoSociedad;
-    public Hashtable Departamentos;
+    public ArrayList Departamentos;
     
     public void setDepartamentos(Departamentos departamento){
-
         
     }
     

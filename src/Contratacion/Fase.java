@@ -7,22 +7,16 @@ package Contratacion;
  * and open the template in the editor.
  */
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Hashtable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 
 /**
  *
  * @author Edwin Chocoy
  */
-@Entity
-public class Fase implements FaseReclutamiento,MetodosConstructorFases,Serializable{
 
-    @Id
-    private Long id;
+public class Fase implements FaseReclutamiento,MetodosConstructorFases{
     
     public int numeroFase;
     public String nombreFase;
@@ -88,14 +82,6 @@ public class Fase implements FaseReclutamiento,MetodosConstructorFases,Serializa
     @Override
     public void setPropiedades(Hashtable datos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
     
     

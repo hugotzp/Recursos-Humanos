@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructura;
+package Personas;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
-public interface ContratacionEmpleados {
-    public void contratarEmpleado(String idPersona,String idEmpleado,String idDepartamento,float salarioBase);
+public interface AdaptadorContratacion {
+    public Persona getPersona(Integer idAspirante);
+    public void guardarPersona(Persona persona);
 }

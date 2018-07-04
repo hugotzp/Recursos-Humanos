@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructura;
+package EstructuraOrganizacional;
 
 import java.util.Date;
 
@@ -17,13 +17,9 @@ public class Personal implements Persona{
     public String Apellido;
     public String DPI;
     public boolean Genero;
-    public Date fechaNacimiento;
+    public Date fechaNaciemiento;
     public String Telefono;
-    
-    public void Persona(){
-        
-    }
-    
+
     @Override
     public void setNombre(String nombre) {
         this.Nombre=nombre;
@@ -57,15 +53,11 @@ public class Personal implements Persona{
         
     }
 
-    // genero = 1, masculino
-    // genero = 0, femenino
-    
     @Override
     public void setGenero(boolean genero) {
         this.Genero=genero;
     }
-    
-    
+
     @Override
     public boolean getGenero() {
         return this.Genero;
@@ -74,12 +66,12 @@ public class Personal implements Persona{
 
     @Override
     public void setFechaNacimiento(Date fecha) {
-        this.fechaNacimiento=fecha;
+        this.fechaNaciemiento=fecha;
     }
 
     @Override
     public Date getFechaNacimiento() {
-        return this.fechaNacimiento;
+        return this.fechaNaciemiento;
         
     }
 
@@ -98,6 +90,10 @@ public class Personal implements Persona{
     public int calcularEdad() {
         
         int edad = 0;
+        /*String fecha="08-09-1998";
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaNacimiento= format.parse(fecha);*/
+        Date fechaNacimiento = this.fechaNaciemiento;
         Date fechaActual= new Date();
         edad = fechaActual.getYear()-fechaNacimiento.getYear();
         return edad;

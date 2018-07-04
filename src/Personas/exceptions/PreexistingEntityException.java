@@ -1,4 +1,4 @@
-package Estructura.exceptions;
+package Personas.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

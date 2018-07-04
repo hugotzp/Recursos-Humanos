@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Contratacion;
+package Personas;
 
-import Contratacion.exceptions.NonexistentEntityException;
-import Contratacion.exceptions.PreexistingEntityException;
+import Personas.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,11 +17,11 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
-public class JpaControllerAspirantes implements Serializable {
+public class JpaController_Personal implements Serializable {
 
-    public JpaControllerAspirantes(EntityManagerFactory emf) {
+    public JpaController_Personal(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,18 +30,13 @@ public class JpaControllerAspirantes implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Aspirantes aspirantes) throws PreexistingEntityException, Exception {
+    public void create(Personal personal) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(aspirantes);
+            em.persist(personal);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findAspirantes(aspirantes.getId()) != null) {
-                throw new PreexistingEntityException("Aspirantes " + aspirantes + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -50,19 +44,19 @@ public class JpaControllerAspirantes implements Serializable {
         }
     }
 
-    public void edit(Aspirantes aspirantes) throws NonexistentEntityException, Exception {
+    public void edit(Personal personal) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            aspirantes = em.merge(aspirantes);
+            personal = em.merge(personal);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = aspirantes.getId();
-                if (findAspirantes(id) == null) {
-                    throw new NonexistentEntityException("The aspirantes with id " + id + " no longer exists.");
+                Long id = personal.getId();
+                if (findPersonal(id) == null) {
+                    throw new NonexistentEntityException("The personal with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +72,14 @@ public class JpaControllerAspirantes implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Aspirantes aspirantes;
+            Personal personal;
             try {
-                aspirantes = em.getReference(Aspirantes.class, id);
-                aspirantes.getId();
+                personal = em.getReference(Personal.class, id);
+                personal.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The aspirantes with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The personal with id " + id + " no longer exists.", enfe);
             }
-            em.remove(aspirantes);
+            em.remove(personal);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +88,19 @@ public class JpaControllerAspirantes implements Serializable {
         }
     }
 
-    public List<Aspirantes> findAspirantesEntities() {
-        return findAspirantesEntities(true, -1, -1);
+    public List<Personal> findPersonalEntities() {
+        return findPersonalEntities(true, -1, -1);
     }
 
-    public List<Aspirantes> findAspirantesEntities(int maxResults, int firstResult) {
-        return findAspirantesEntities(false, maxResults, firstResult);
+    public List<Personal> findPersonalEntities(int maxResults, int firstResult) {
+        return findPersonalEntities(false, maxResults, firstResult);
     }
 
-    private List<Aspirantes> findAspirantesEntities(boolean all, int maxResults, int firstResult) {
+    private List<Personal> findPersonalEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Aspirantes.class));
+            cq.select(cq.from(Personal.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,20 +112,20 @@ public class JpaControllerAspirantes implements Serializable {
         }
     }
 
-    public Aspirantes findAspirantes(Long id) {
+    public Personal findPersonal(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Aspirantes.class, id);
+            return em.find(Personal.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAspirantesCount() {
+    public int getPersonalCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Aspirantes> rt = cq.from(Aspirantes.class);
+            Root<Personal> rt = cq.from(Personal.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

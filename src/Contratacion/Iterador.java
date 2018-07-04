@@ -5,14 +5,14 @@
  */
 package Contratacion;
 
-import OtrasClases.*;
-import java.util.ArrayList;
-
 /**
  *
- * @author Hugo
+ * @author Edwin Chocoy
  */
 public interface Iterador {
-    public boolean hasMore();
+    
     public Object getNext();
+    
+    public boolean hasMore();
+    
 }

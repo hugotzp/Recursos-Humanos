@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructura;
+package EstructuraOrganizacional;
 
-import Personas.Persona;
 import java.util.ArrayList;
 
 /**
@@ -57,7 +56,7 @@ public class Trabajador implements Empleo {
     }
 
     @Override
-    public ArrayList obtenerInformacion() {
+    public Object obtenerInformacion(int tipo) {
         
         ArrayList informacion = null;
         

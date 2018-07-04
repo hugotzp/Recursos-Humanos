@@ -8,13 +8,20 @@ package Contratacion;
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public class PropuestaEmpleo implements Puesto{
+@Entity
+public class PropuestaEmpleo implements Puesto,Serializable{
+
+    @Id
+    private Long id;
     
     public String Puesto;
 
@@ -70,9 +77,12 @@ public class PropuestaEmpleo implements Puesto{
         return Requisitos;
     }
 
-    
-    
-    
-    
-    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+   
 }

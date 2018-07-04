@@ -5,14 +5,18 @@
  */
 package Contratacion;
 
-import OtrasClases.*;
 import java.util.ArrayList;
 
 /**
  *
- * @author Hugo
+ * @author Edwin Chocoy
  */
-public interface Iterador {
-    public boolean hasMore();
-    public Object getNext();
+public interface ModuloContratacion {
+    
+    public ArrayList obtenerReclutamientos();
+    
+    public boolean guardarReclutamiento(Reclutar reclutamiento);
+    
+    public void contratarEmpleado();
+    
 }

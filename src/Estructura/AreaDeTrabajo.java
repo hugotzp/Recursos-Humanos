@@ -13,20 +13,15 @@ import java.util.ArrayList;
  */
 public interface AreaDeTrabajo {
     
-    /**
-     *
-     * @param trabajador
-     */
-    public void setPersonal(Empleo trabajador);
     
-    public ArrayList getPersonal();
+    public void setPersonal(Trabajadores trabajador);
     
-    /**
-     *
-     * @param nombre
-     */
+    public ArrayList getPersonal();    
+
     public void setNombre(String nombre);
     
     public String getNombre();
+    
+    public void obtenerEmpleados();
     
 }

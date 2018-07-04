@@ -5,38 +5,38 @@
  */
 package Estructura;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public interface Empleo {
-    
-    /**
-     *
-     * @param salario
-     */
-    public void setSalario(float salario);
-    
-    public float getSalario();
-    
-    /**
-     *
-     * @param nombre
-     */
-    public void setNombre(String nombre);
-    
-    public String getNombre();
-    
-    /**
-     *
-     * @param persona
-     */
-    public void setPersona(Persona persona);
 
-    public Persona getPersona();
+@Entity
+public class Empleo implements PuestoTrabajador,Serializable{
     
-    public Object obtenerInformacion();
-  
+    @Id
+    Long id;
+    String nombre;
+
+    @Override
+    public void setNombre(String nombre) {
+        this.nombre=nombre;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 }

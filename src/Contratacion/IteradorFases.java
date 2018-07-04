@@ -45,7 +45,7 @@ public class IteradorFases implements Iterator {
 
     @Override
     public void reset() {
-        posicionActual = 0;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

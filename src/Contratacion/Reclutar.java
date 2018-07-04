@@ -8,13 +8,17 @@
 package Contratacion;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 /**
  *
  * @author Edwin Chocoy
  */
-public class Reclutar implements Reclutamiento,IterableCollection{
+@Entity
+public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     
     public Date fechaContratacion;
     public Date fechaInicio;
@@ -27,6 +31,8 @@ public class Reclutar implements Reclutamiento,IterableCollection{
     public ArrayList finalistas;
     public Puesto propuesta;
     Evaluacion evaluar;
+    @Id
+    private Long id;
 
     public Reclutar(Puesto propuesta) {
         this.fechaContratacion = new Date();
@@ -62,12 +68,31 @@ public class Reclutar implements Reclutamiento,IterableCollection{
     public void setPropuesta(PropuestaEmpleo propuesta) {
         this.propuesta = propuesta;
     }
+    
+    public void setAspirantes(ArrayList aspirantes) {
+        this.aspirantes = aspirantes;
+    }
 
+    public void setFinalistas(ArrayList finalistas) {
+        this.finalistas = finalistas;
+    }
+
+    public void setPropuesta(Puesto propuesta) {
+        this.propuesta = propuesta;
+    }
+    
+    public void setAspirante(Aspirantes aspirante){
+        this.aspirantes.add(aspirante);
+    }
+
+    public void setFinalista(Aspirantes aspirante){
+        this.finalistas.add(finalistas);
+    }
+    
     public Evaluacion getEvaluar() {
         return evaluar;
     }
 
-    
     public Date getFechaContratacion() {
         return fechaContratacion;
     }
@@ -100,26 +125,6 @@ public class Reclutar implements Reclutamiento,IterableCollection{
         return propuesta;
     }
 
-    public void setAspirantes(ArrayList aspirantes) {
-        this.aspirantes = aspirantes;
-    }
-
-    public void setFinalistas(ArrayList finalistas) {
-        this.finalistas = finalistas;
-    }
-
-    public void setPropuesta(Puesto propuesta) {
-        this.propuesta = propuesta;
-    }
-    
-    public void setAspirante(Aspirantes aspirante){
-        this.aspirantes.add(aspirante);
-    }
-
-    public void setFinalista(Aspirantes aspirante){
-        this.finalistas.add(finalistas);
-    }
-    
     public void reset(){
         aspirantes = new ArrayList<Aspirantes>();
         finalistas = new ArrayList<Aspirantes>();
@@ -138,17 +143,12 @@ public class Reclutar implements Reclutamiento,IterableCollection{
     }
 
     @Override
-    public void preseleccionarFinalistas() {
-        finalistas = this.evaluar.seleccionarAspirantes();
+    public ArrayList obtenerFinalistas() {
+        return finalistas;
     }
 
     @Override
-    public Iterador obtenerFinalistas() {
-        return new IteradorAspirantes(finalistas);
-    }
-
-    @Override
-    public Iterador obtenerAspirantes() {
+    public IteradorAspirantes obtenerAspirantes() {
         return new IteradorAspirantes(aspirantes);
     }
 
@@ -160,6 +160,29 @@ public class Reclutar implements Reclutamiento,IterableCollection{
     @Override
     public Iterador createIteradorFase(ArrayList fase) {
         return new IteradorAspirantes(aspirantes);
+    }
+
+    @Override
+    public void cargarAspirantes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cargarPuesto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cargarFases() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

@@ -6,6 +6,7 @@
 package Contratacion;
 
 import java.util.ArrayList;
+import OtrasClases.*;
 
 /**
  *

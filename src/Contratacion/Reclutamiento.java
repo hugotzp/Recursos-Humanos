@@ -18,11 +18,17 @@ public interface Reclutamiento {
     
     public void setFaseReclutamiento(int numero);
     
-    public void preseleccionarFinalistas();
-    
-    public Object obtenerFinalistas();
-    
-    public Object obtenerAspirantes();
+    public ArrayList obtenerFinalistas();
     
     public void setEvaluacion(Evaluacion evaluacion);
+
+    public IteradorAspirantes obtenerAspirantes();
+    
+    public void cargarAspirantes();
+    
+    public void cargarPuesto();
+    
+    public void cargarFases();
+    
+    
 }

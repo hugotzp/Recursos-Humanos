@@ -5,16 +5,16 @@
  */
 package Planilla;
 
-import OtrasClases.CreadorIterador;
-import OtrasClases.Iterador;
-import OtrasClases.IteradorPlanilla;
+
+import OtrasClases.IterableCollection;
+import OtrasClases.Iterator;
 import java.util.ArrayList;
 
 /**
  *
  * @author Hugo
  */
-public class PlanillaDepartamento implements PlanillaAreaTrabajo{
+public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollection{
     String nombreSector;
     ArrayList<PagoTrabajador> Trabajadores;
     
@@ -35,12 +35,16 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo{
 
     @Override
     public float obtenerTotalPagoPlanilla() {
-        CreadorIterador creador = new CreadorIterador();
-        IteradorPlanilla planilla = creador.crearIteradorPlanilla();
+        IteradorPlanilla planilla = (IteradorPlanilla) crearIterador();
         float Total=0;
         while(planilla.hasMore()){
             Total += planilla.getNext().getTotalAPagar();
         }
         return Total;
+    }
+
+    @Override
+    public Iterator crearIterador() {
+        return new IteradorPlanilla(Trabajadores);
     }
 }

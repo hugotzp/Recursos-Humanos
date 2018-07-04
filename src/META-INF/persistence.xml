@@ -4,11 +4,20 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Personas.Personal</class>
     <class>Personas.JpaController_Personal</class>
+    <class>Planilla.Bonificacion</class>
+    <class>Planilla.Prestamo</class>
+    <class>Planilla.IGSS</class>
+    <class>Planilla.HorasExtra</class>
+    <class>Planilla.Cheque</class>
+    <class>Planilla.Efectivo</class>
+    <class>Planilla.NotaDebito</class>
+    <class>Planilla.PagoEmpleado</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/base_rrhh?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="hugo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

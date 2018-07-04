@@ -5,13 +5,14 @@
  */
 package Contratacion;
 
+import OtrasClases.Iterator;
 import java.util.ArrayList;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public class IteradorFases implements Iterador {
+public class IteradorFases implements Iterator {
     
     ArrayList<FaseReclutamiento> fases;
     private int posicionActual=0;
@@ -40,6 +41,11 @@ public class IteradorFases implements Iterador {
             ok = true;
         }
         return ok;
+    }
+
+    @Override
+    public void reset() {
+        posicionActual = 0;
     }
     
 }

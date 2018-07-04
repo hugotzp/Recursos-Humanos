@@ -25,7 +25,7 @@ public class ConstructorCheque implements ConstructorFormaDePago{
                 pago.setNumeroDocumento((String)parte);
                 break;
             case pCuentaEmpresa:
-                pago.setCuenta((String)parte);
+                pago.setCuentaEmpresa((String)parte);
                 break;
         }
     }

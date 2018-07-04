@@ -5,17 +5,53 @@
  */
 package Estructura;
 
-import Personas.Persona;
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public class Trabajador implements Empleo {
+@Entity
+@Table(name="Trabajador")
+
+//@NamedQuery(name="obtenerTrabajadoresDerpartamento",query="SELECT t FROM trabajador t WHERE Departamento_idDepartamento = :idDepa")
+
+
+public class Trabajador implements Trabajadores, Serializable {
     
-    public String Nombre;
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaTrabajador",
+            allocationSize = 1,
+            initialValue= 1
+    )
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaTrabajador")
+    @Column(name="idTrabajador")
+    private Long id;
     public float Salario;
+    @Column(name="Persona_idPersona")
+    private Long idPersona;
+    @Column(name="Empleo_idEmpleo")
+    private Long idEmpleo;
+    @Column(name="Departamento_idDepartamento")
+    private Long idDepartamento;
+    
+    
+    @Transient
+    public String NombreEmpleo;
+    @Transient
     public Persona Persona;
     
     
@@ -23,12 +59,6 @@ public class Trabajador implements Empleo {
     @Override
     public void setSalario(float salario) {
         this.Salario=salario;
-        
-    }
-
-    @Override
-    public void setNombre(String nombre) {
-        this.Nombre=nombre;
         
     }
 
@@ -45,24 +75,96 @@ public class Trabajador implements Empleo {
     }
 
     @Override
-    public String getNombre() {
-        return this.Nombre;
-        
-    }
-
-    @Override
     public Persona getPersona() {
-        return this.Persona;
+        
+        EstructuraAdministrativaPersona ePersona;
+        this.Persona = ePersona.adaptador.getPersonal(id);
+        
+        return Persona;
         
     }
 
     @Override
-    public ArrayList obtenerInformacion() {
+    public Object obtenerInformacion(int tipo) {
         
-        ArrayList informacion = null;
+        Object informacion = null;
         
         return informacion;
         
     }
+    
+    public void setNombreEmpleo(String NombreEmpleo) {
+        this.NombreEmpleo = NombreEmpleo;
+    }
+        
+    public String getNombreEmpleo() {
+        return NombreEmpleo;
+    }
+    
+    
+    
+    
+    //BD
+
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
+    }
+
+    public void setIdEmpleo(Long idEmpleo) {
+        this.idEmpleo = idEmpleo;
+    }
+
+    public void setIdDepartamento(Long idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
+
+    public Long getIdPersona() {
+        return idPersona;
+    }
+
+    public Long getIdEmpleo() {
+        return idEmpleo;
+    }
+
+    public Long getIdDepartamento() {
+        return idDepartamento;
+    }
+
+    
+    
+    
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Trabajador)) {
+            return false;
+        }
+        Trabajador other = (Trabajador) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "orm.Trabajador[ id=" + id + " ]";
+    }    
     
 }

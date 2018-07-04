@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Hugo
  */
-class IteradorAspirantes implements Iterador{
+class IteradorAspirantes implements Iterador {
     ArrayList<Aspirantes> aspirantes;
     int posicionActual;
     

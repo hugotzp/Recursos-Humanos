@@ -6,6 +6,7 @@
 package Contratacion;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Personas;
+package Estructura;
 
 /**
  *
- * @author Hugo
+ * @author Edwin Chocoy
  */
-public interface AdaptadorEstructura {
-    public Persona getPersona(Integer idEmpleado);
+public class EstructuraAdministradorPersona {
+    AdaptadorEstructura adaptador;
 }

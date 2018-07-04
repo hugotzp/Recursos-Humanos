@@ -1,4 +1,4 @@
-package Personas.exceptions;
+package Contratacion.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {

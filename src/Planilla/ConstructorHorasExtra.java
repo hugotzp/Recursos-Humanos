@@ -22,7 +22,7 @@ public class ConstructorHorasExtra implements ConstructorVariacionSalarial{
     public void buildPart(int tipo, Object objeto) {
         switch(tipo){
             case pNumeroHorasExtra:
-                variacion.setHorasExtra((float) objeto);
+                variacion.setNumeroHorasExtra((float) objeto);
                 break;
             case pSalarioBase:
                 variacion.setSalarioBase((float)objeto);

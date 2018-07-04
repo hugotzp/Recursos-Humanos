@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Contratacion;
-
-import java.util.ArrayList;
+package OtrasClases;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
 public interface IterableCollection {
-    
-    public Iterador createIteradorFase(ArrayList fase);
-    //public IteradorAspirantes createIteradorAspirantes(ArrayList aspirantes);
+    public Iterator crearIterador();
     
 }

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Contratacion;
+package OtrasClases;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
-public interface ColeccionIteradores {
-    
-    public Iterador crearIterador();
-    
+public interface Iterator {
+    public boolean hasMore();
+    public Object getNext();
+    public void reset();
 }

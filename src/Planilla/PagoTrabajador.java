@@ -15,4 +15,7 @@ public interface PagoTrabajador {
     public void setEmpleado(Empleo empleado);
     public void setTotalPagar(float total);
     public void calculartotalPagar();
+    public void obtenerVariaciones();
+    public void obtenerFormaPago();
+    public void guardarBase();
 }

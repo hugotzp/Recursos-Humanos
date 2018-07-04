@@ -5,13 +5,15 @@
  */
 package Contratacion;
 
+
+import OtrasClases.Iterator;
 import java.util.ArrayList;
 
 /**
  *
  * @author Hugo
  */
-class IteradorAspirantes implements Iterador{
+class IteradorAspirantes implements Iterator{
     ArrayList<Aspirantes> aspirantes;
     int posicionActual;
     

@@ -15,7 +15,7 @@ import Personas.Persona;
  *
  * @author Edwin Chocoy
  */
-public class Aspirantes implements PersonasInteresadas,ColeccionIteradores{
+public class Aspirantes implements PersonasInteresadas{
     
     public boolean enProceso;
     public float salarioEsperado;
@@ -82,11 +82,5 @@ public class Aspirantes implements PersonasInteresadas,ColeccionIteradores{
 
         
     }
-
-    @Override
-    public Iterador crearIterador() {
-        return new IteradorFases(this);
-    }
-
     
 }

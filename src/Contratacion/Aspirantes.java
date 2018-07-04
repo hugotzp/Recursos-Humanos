@@ -7,9 +7,9 @@ package Contratacion;
  * and open the template in the editor.
  */
 
+import OtrasClases.Iterator;
+import Personas.*;
 import java.util.ArrayList;
-import Estructura.Persona;
-import Estructura.Personal;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -101,7 +101,7 @@ public class Aspirantes implements PersonasInteresadas,ColeccionIteradores,Seria
     }
 
     @Override
-    public Iterador crearIterador() {
+    public Iterator crearIterador() {
         return new IteradorFases(this);
     }
 
@@ -122,5 +122,7 @@ public class Aspirantes implements PersonasInteresadas,ColeccionIteradores,Seria
     public void setId(Long id) {
         this.id = id;
     }
+
+    
     
 }

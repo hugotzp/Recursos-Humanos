@@ -8,7 +8,7 @@
 package Contratacion;
 
 
-import Estructura.Persona;
+import Personas.*;
 import java.util.ArrayList;
 
 /**

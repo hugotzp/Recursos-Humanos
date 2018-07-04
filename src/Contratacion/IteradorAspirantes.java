@@ -5,15 +5,15 @@
  */
 package Contratacion;
 
-
-import OtrasClases.Iterator;
 import java.util.ArrayList;
+import OtrasClases.*;
 
 /**
  *
  * @author Hugo
  */
 class IteradorAspirantes implements Iterator{
+    
     ArrayList<Aspirantes> aspirantes;
     int posicionActual;
     
@@ -30,12 +30,17 @@ class IteradorAspirantes implements Iterator{
             return null;
         }
     }
-    
+    @Override
     public boolean hasMore(){
         return posicionActual <= aspirantes.size();
     }
-    
+    @Override
     public void reset(){
         posicionActual = 0;
+    }
+    
+    @Override
+    public void reset() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

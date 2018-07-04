@@ -5,23 +5,24 @@
  */
 package Estructura;
 
+import Personas.*;
 import java.util.ArrayList;
 
 /**
  *
  * @author Edwin Chocoy
  */
-public interface AreaDeTrabajo {
+public interface Trabajadores {
     
     
-    public void setPersonal(Trabajadores trabajador);
+    public void setSalario(float salario);
     
-    public ArrayList getPersonal();    
+    public float getSalario();
+       
+    public void setPersona(Persona persona);
 
-    public void setNombre(String nombre);
+    public Persona getPersona();
     
-    public String getNombre();
-    
-    public void obtenerEmpleados();
-    
+    public Object obtenerInformacion(int tipo);
+  
 }

@@ -8,21 +8,46 @@ package Contratacion;
  */
 
 import java.util.ArrayList;
-import Personas.Persona;
+import Estructura.Persona;
+import Estructura.Personal;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 
 /**
  *
  * @author Edwin Chocoy
  */
-public class Aspirantes implements PersonasInteresadas{
+@Entity
+@Table(name="Aspirante")
+public class Aspirantes implements PersonasInteresadas,ColeccionIteradores,Serializable{
     
-    public boolean enProceso;
-    public float salarioEsperado;
-
     public ArrayList<FaseReclutamiento> fases;
     public static Persona persona;
-
+    
+    
+    
+    
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaAspirante",
+            allocationSize = 1,
+            initialValue= 1
+    )
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaAspirante")
+    @Id
+    private Long id;
+    @Column(name="enProceso")
+    public boolean enProceso;
+    @Column(name="SalarioEsperado")
+    public float salarioEsperado;
+    
     public Aspirantes(Persona p) {
        this.persona = p;
     }
@@ -33,11 +58,6 @@ public class Aspirantes implements PersonasInteresadas{
 
     public void setSalarioEsperado(float salarioEsperado) {
         this.salarioEsperado = salarioEsperado;
-    }
-
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     public boolean getEnProceso() {
@@ -65,7 +85,6 @@ public class Aspirantes implements PersonasInteresadas{
     public boolean getTipoProceso() {
 
         return enProceso;
-
         
     }
 
@@ -78,9 +97,30 @@ public class Aspirantes implements PersonasInteresadas{
 
     @Override
     public ArrayList getFasesReclutamiento() {
-        return fases;
+        return fases;  
+    }
 
-        
+    @Override
+    public Iterador crearIterador() {
+        return new IteradorFases(this);
+    }
+
+    @Override
+    public void cargarFaseReclutamiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

@@ -8,6 +8,7 @@
 package Contratacion;
 
 
+import Estructura.Persona;
 import java.util.ArrayList;
 
 /**
@@ -23,5 +24,9 @@ public interface PersonasInteresadas {
     public void setFasesReclutamiento(FaseReclutamiento fase);
 
     public ArrayList getFasesReclutamiento();
+    
+    public void cargarFaseReclutamiento();
+    
+    public void setPersona(Persona persona);
     
 }

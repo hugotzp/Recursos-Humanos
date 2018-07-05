@@ -5,12 +5,24 @@
  */
 package Estructura;
 
+import Conexion.Conexion;
 import Personas.AdaptadorEstructura;
+import Personas.JpaController_PersonalEstructura;
+import Personas.*;
 
 /**
  *
  * @author Edwin Chocoy
  */
 public class EstructuraAdministradorPersona {
-    AdaptadorEstructura adaptador;
+    
+    private AdaptadorEstructura adaptador;
+    
+    public Persona getPersona(int id){
+                
+        Conexion con = Conexion.getConexion();
+        adaptador = new JpaController_PersonalEstructura(con.getEMF());
+        
+        return adaptador.getPersona(id);
+    }
 }

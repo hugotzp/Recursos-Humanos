@@ -24,5 +24,7 @@ public interface Trabajadores {
     public Persona getPersona();
     
     public Object obtenerInformacion(int tipo);
+    
+    public void obtenerPersona();
   
 }

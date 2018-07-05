@@ -17,8 +17,19 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
 
     public String Nombre;
     public String TipoSociedad;
-    public ArrayList Departamentos;
-
+    public ArrayList<Departamentos> Departamentos;
+    
+    public ArrayList cargarEmpleados(ArrayList<Departamentos> deps){
+        
+        for(int index=0;index<deps.size();index++){
+            deps.get(index).obtenerEmpleados();
+        }
+        
+        return deps;
+        
+    }
+    
+    
     @Override
     public void mostrarEstructuraOrganizacional() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,9 +47,12 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
 
     @Override
     public ArrayList getDepartamentos() {
+        
         Conexion con = Conexion.getConexion();
         JpaControllerDepartamentos d = new JpaControllerDepartamentos(con.getEMF());
-        return new ArrayList(d.findDepartamentosEntities());
+        ArrayList<Departamentos> deps = new ArrayList(d.findDepartamentosEntities());
+
+        return cargarEmpleados(deps);
         
     }
 
@@ -46,9 +60,13 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
     public void guardarDepartamentos() {
         Conexion con = Conexion.getConexion();
         JpaControllerDepartamentos d = new JpaControllerDepartamentos(con.getEMF());
-        
-        for(int index=0;index<=Departamentos.size();index++){
-            d.create((Departamentos) Departamentos.get(index));
+        System.out.println(Departamentos.size());
+        for(int index=0;index<Departamentos.size();index++){
+            
+            boolean existe = d.depatamentoExiste(Departamentos.get(index).getNombre());
+            
+            if(existe==false)
+                d.create((Departamentos) Departamentos.get(index));
         }
         
     }

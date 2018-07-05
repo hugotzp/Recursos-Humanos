@@ -24,7 +24,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name="Departamento")
-
+@NamedQuery(name="depExiste",query="SELECT d FROM Departamentos d WHERE d.Nombre = :nombre")
 public class Departamentos implements AreaDeTrabajo, Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class Departamentos implements AreaDeTrabajo, Serializable {
     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
     @Transient
-    public ArrayList Personal;
+    public ArrayList<Trabajadores> Trabajadores;
     
     public void Departamentos(){
         this.id = 0L;
@@ -52,12 +52,12 @@ public class Departamentos implements AreaDeTrabajo, Serializable {
 
     @Override
     public void setPersonal(Trabajadores trabajador) {
-        this.Personal.add(trabajador);
+        this.Trabajadores.add(trabajador);
     }
     
     @Override
     public ArrayList getPersonal() {
-        return Personal;
+        return Trabajadores;
     }
     @Override
     public void setNombre(String nombre) {
@@ -76,7 +76,11 @@ public class Departamentos implements AreaDeTrabajo, Serializable {
         
         Conexion con = Conexion.getConexion();
         JpaControllerTrabajador t = new JpaControllerTrabajador(con.getEMF());
-        Personal=new ArrayList(t.obtenerTDepartamentos(id));
+        Trabajadores = new ArrayList(t.obtenerTDepartamentos(id));
+        
+        for(int index=0;index<Trabajadores.size();index++){
+            Trabajadores.get(index).obtenerPersona();
+        }
     }
 
 

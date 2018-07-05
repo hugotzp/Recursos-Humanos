@@ -6,6 +6,7 @@
 package Contratacion;
 
 import Estructura.*;
+import Personas.*;
 
 /**
  *

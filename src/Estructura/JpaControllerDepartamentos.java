@@ -135,5 +135,18 @@ public class JpaControllerDepartamentos implements Serializable {
         }
     }
     
+    public boolean depatamentoExiste(String nombre){
+        EntityManager em = getEntityManager();
+        TypedQuery<Departamentos> query = em.createNamedQuery("depExiste",Departamentos.class);
+        query.setParameter("nombre", nombre);
+        List<Departamentos> dep = query.getResultList();
+        
+        if(dep.size()>0)
+            return true;
+        else
+            return false;
+    }
+    
+    
     
 }

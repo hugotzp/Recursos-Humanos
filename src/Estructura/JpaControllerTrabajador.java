@@ -138,7 +138,7 @@ public class JpaControllerTrabajador implements Serializable {
     public List<Trabajador> obtenerTDepartamentos(Long idDepa){
         EntityManager em = getEntityManager();
         TypedQuery<Trabajador> query = em.createNamedQuery("obtenerTrabajadoresDerpartamento",Trabajador.class);
-        return query.setParameter("idDepartamento", idDepa).getResultList();
+        return query.setParameter("idDepa", idDepa).getResultList();
     }
     
 }

@@ -6,8 +6,13 @@
 package Estructura;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 /**
  *
@@ -15,9 +20,18 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name="Empleo")
 public class Empleo implements PuestoTrabajador,Serializable{
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaEmpleo",
+            allocationSize = 1,
+            initialValue= 1
+    )
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaEmpleo")
+    @Column(name="idEmpleo")
     Long id;
     String nombre;
 

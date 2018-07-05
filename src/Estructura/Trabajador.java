@@ -55,10 +55,20 @@ public class Trabajador implements Trabajadores, Serializable {
     @Transient
     public Persona Persona;
     @Transient
-
+    public Empleo empleo;
     
     public void Trabajador(Persona p){
         
+    }
+    
+    @Override
+    public void setNombreEmpleo(String e){
+        this.NombreEmpleo=e;
+    }
+    
+    @Override
+    public String getNombreEmpleo(){
+        return NombreEmpleo;
     }
     
     
@@ -101,20 +111,19 @@ public class Trabajador implements Trabajadores, Serializable {
         
         EstructuraAdministradorPersona adminPersona = new EstructuraAdministradorPersona();
         Persona=adminPersona.getPersona(idPersona.intValue());
-
-    }    
-    
-    public void setNombreEmpleo(String NombreEmpleo) {
-        this.NombreEmpleo = NombreEmpleo;
-    }
+        //System.out.println("ID EMPLEO "+idEmpleo);
+        obtenerEmpleo();
         
-    public String getNombreEmpleo() {
-        return NombreEmpleo;
+        
+    }
+    @Override
+    public void obtenerEmpleo(){
+        Conexion con = Conexion.getConexion();
+        JpaControllerEmpleo e = new JpaControllerEmpleo(con.getEMF());
+        this.empleo=e.findEmpleo(idEmpleo);        
+        this.NombreEmpleo=empleo.getNombre();
     }
 
-    
-    
-    
     
     //BD
     public void setId(Long id) {

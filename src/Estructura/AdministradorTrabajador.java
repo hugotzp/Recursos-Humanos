@@ -5,16 +5,12 @@
  */
 package Estructura;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Edwin Chocoy
  */
-public interface AdministradorDepartamentos {
+public interface AdministradorTrabajador {
     
-    public ArrayList getEstructura();
-    
-    public ArrayList getIdDepartamentos();
+    public Trabajador getTrabajador(Long id);
     
 }

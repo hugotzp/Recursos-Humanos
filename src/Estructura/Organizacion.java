@@ -42,17 +42,29 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
 
     @Override
     public void crearEstructura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Conexion con = Conexion.getConexion();
+        JpaControllerDepartamentos d = new JpaControllerDepartamentos(con.getEMF());
+        Departamentos = new ArrayList(d.findDepartamentosEntities());
+
+        cargarEmpleados(Departamentos);
     }
 
     @Override
-    public ArrayList getDepartamentos() {
+    public ArrayList getEstructura() {
         
+        crearEstructura();
+
+        return (Departamentos);
+        
+    }
+    
+    @Override
+    public ArrayList getIdDepartamentos(){
         Conexion con = Conexion.getConexion();
         JpaControllerDepartamentos d = new JpaControllerDepartamentos(con.getEMF());
         ArrayList<Departamentos> deps = new ArrayList(d.findDepartamentosEntities());
-
-        return cargarEmpleados(deps);
+        
+        return deps;
         
     }
 

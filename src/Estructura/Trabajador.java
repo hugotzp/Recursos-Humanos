@@ -5,6 +5,7 @@
  */
 package Estructura;
 
+import Conexion.Conexion;
 import Personas.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,8 +26,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="Trabajador")
 
-//@NamedQuery(name="obtenerTrabajadoresDerpartamento",query="SELECT t FROM trabajador t WHERE Departamento_idDepartamento = :idDepa")
-
+@NamedQuery(name="obtenerTrabajadoresDerpartamento",query="SELECT t FROM Trabajador t WHERE t.idDepartamento = :idDepa")
 
 public class Trabajador implements Trabajadores, Serializable {
     
@@ -55,8 +55,7 @@ public class Trabajador implements Trabajadores, Serializable {
     @Transient
     public Persona Persona;
     @Transient
-    EstructuraAdministradorPersona adminPersona;
-    
+
     
     public void Trabajador(Persona p){
         
@@ -83,10 +82,7 @@ public class Trabajador implements Trabajadores, Serializable {
 
     @Override
     public Persona getPersona() {
-        
-        EstructuraAdministradorPersona ePersona;
-        //this.Persona = ePersona.adaptador.getPersonal(id);
-        
+            
         return Persona;
         
     }
@@ -100,6 +96,14 @@ public class Trabajador implements Trabajadores, Serializable {
         
     }
     
+    @Override    
+    public void obtenerPersona(){
+        
+        EstructuraAdministradorPersona adminPersona = new EstructuraAdministradorPersona();
+        Persona=adminPersona.getPersona(idPersona.intValue());
+
+    }    
+    
     public void setNombreEmpleo(String NombreEmpleo) {
         this.NombreEmpleo = NombreEmpleo;
     }
@@ -107,12 +111,16 @@ public class Trabajador implements Trabajadores, Serializable {
     public String getNombreEmpleo() {
         return NombreEmpleo;
     }
+
     
     
     
     
     //BD
-
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public void setIdPersona(Long idPersona) {
         this.idPersona = idPersona;
     }
@@ -123,6 +131,11 @@ public class Trabajador implements Trabajadores, Serializable {
 
     public void setIdDepartamento(Long idDepartamento) {
         this.idDepartamento = idDepartamento;
+    }
+    
+    @Id
+    public Long getId() {
+        return id;
     }
 
     public Long getIdPersona() {
@@ -137,18 +150,6 @@ public class Trabajador implements Trabajadores, Serializable {
         return idDepartamento;
     }
 
-    
-    
-    
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -171,7 +172,7 @@ public class Trabajador implements Trabajadores, Serializable {
 
     @Override
     public String toString() {
-        return "orm.Trabajador[ id=" + id + " ]";
+        return "Trabajador [id="+id+"]";
     }    
     
 }

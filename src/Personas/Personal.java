@@ -99,7 +99,7 @@ public class Personal implements Serializable,Persona{
 
     @Override
     public String toString() {
-        return "Personas.Personal[ id=" + id + " ]";
+        return "Personas.Personal[id="+id+",nombre: "+Nombre+"]";
     }
 
     @Override
@@ -170,4 +170,5 @@ public class Personal implements Serializable,Persona{
         return edad;
     }
     
+
 }

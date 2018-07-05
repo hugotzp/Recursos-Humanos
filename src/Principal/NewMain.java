@@ -5,6 +5,9 @@
  */
 package Principal;
 
+import Estructura.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author Hugo
@@ -16,6 +19,19 @@ public class NewMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Organizacion o = new Organizacion();
+        o.Departamentos=o.getDepartamentos();       
+        
+        System.out.println(o.Departamentos.get(0).Trabajadores.get(0).getPersona().toString());
+        
+        /*Departamentos d = new Departamentos();
+        d.setNombre("Informatica");
+        a.add(d);
+        
+        o.Departamentos.add(d);
+        o.guardarDepartamentos();*/
+        
     }
     
 }

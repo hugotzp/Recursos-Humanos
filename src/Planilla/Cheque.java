@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,6 +37,18 @@ public class Cheque implements Serializable,FormaDePago {
     private String numeroCheque;
     private String cuentaEmpresa;
     private Long Pago_idPago;
+    @Transient
+    private int aux;
+
+    public int getAux() {
+        return aux;
+    }
+
+    public void setAux(int aux) {
+        this.aux = aux;
+    }
+    
+    
     
     public Cheque(){
         numeroCheque = "";

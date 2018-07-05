@@ -18,4 +18,7 @@ public interface PagoTrabajador {
     public void obtenerVariaciones();
     public void obtenerFormaPago();
     public void guardarBase();
+    public void setFormaDePago(FormaDePago pago);
+    public FormaDePago getFormaDePago();
+    public void pagar();
 }

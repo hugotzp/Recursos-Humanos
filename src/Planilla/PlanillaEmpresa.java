@@ -5,8 +5,11 @@
  */
 package Planilla;
 
+import Conexion.Conexion;
+import Estructura.Departamentos;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  *
@@ -30,6 +33,29 @@ public class PlanillaEmpresa {
     }
     
     public void pagarPlanilla(){
+        for(PlanillaAreaTrabajo area : Planillas){
+            IteradorPlanilla iterador = (IteradorPlanilla) ((PlanillaDepartamento)area).crearIterador();
+            while(iterador.hasMore()){
+                iterador.getNext().pagar();
+            }
+        }
+    }
+    
+    public void GuardarPlanilla(){
+        Conexion con = Conexion.getConexion();
+        JpaControllerPlanilla p = new JpaControllerPlanilla(con.getEMF());
+        for(PlanillaAreaTrabajo area : Planillas){
+            PlanillaDepartamento dep = (PlanillaDepartamento) area;
+            if(dep.getId()<0) p.create(dep);
+            dep.guardar();
+        }
+    }
+    
+    public void obtenerPlanillaBase(){
+        
+    }
+    
+    public void crearNuevaPlanillaEmpresa(){
         
     }
 }

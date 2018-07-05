@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -25,6 +26,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name= "Pago")
+@NamedQuery(name = "pagosPlanilla",query = "SELECT p FROM PagoEmpleado p WHERE p.Planilla_idPlanillaGeneral = :idPlanilla")
 public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollection {
     private static final long serialVersionUID = 1L;
     @TableGenerator(
@@ -51,6 +53,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     private ArrayList<VariacionSalarial> VariacionesSalariales;
 
     public PagoEmpleado() {
+        this.id = -1L;
     }
 
     
@@ -59,6 +62,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
         this.FormaPago = pago;
         this.Trabajador = Trabajador;
         this.VariacionesSalariales = new ArrayList<>();
+        this.id = -1L;
     }
     
     public Long getId() {
@@ -172,7 +176,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     public void calculartotalPagar() {
         float auxTotal = 0;
         //Obtener sueldo base
-        //auxTotal += Trabajador.getSueldo();
+        //auxTotal += Trabajador.();
         IteradorVariaciones lista = (IteradorVariaciones) crearIterador();
         while(lista.hasMore()){
             auxTotal = lista.getNext().modificarSalario(auxTotal);
@@ -237,26 +241,53 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
             switch(var.getClass().getName()){
                 case "Planilla.Bonificacion":
                     Bonificacion auxBon = (Bonificacion) var;
-                    auxBon.setPago_idPago(id);
-                    bon.create(auxBon);
+                    if(auxBon.getId() < 0){
+                        auxBon.setPago_idPago(id);
+                        bon.create(auxBon);
+                    }
                     break;
                 case "Planilla.IGSS":
                     IGSS auxIgss = (IGSS) var;
-                    auxIgss.setPago_idPago(id);
-                    igss.create(auxIgss);
+                    if(auxIgss.getId()<0){
+                        auxIgss.setPago_idPago(id);
+                        igss.create(auxIgss);
+                    }
                     break;
                 case "Planilla.Prestamo":
                     Prestamo auxPres = (Prestamo) var;
-                    auxPres.setPago_idPago(id);
-                    pres.create(auxPres);
+                    if(auxPres.getId()<0){
+                        auxPres.setPago_idPago(id);
+                        pres.create(auxPres);
+                    }
                     break;
                 case "Planilla.HorasExtra":
                     HorasExtra auxHoras = (HorasExtra) var;
-                    auxHoras.setPago_idPago(id);
-                    horas.create(auxHoras);
+                    if(auxHoras.getId()<0){
+                        auxHoras.setPago_idPago(id);
+                        horas.create(auxHoras);
+                    }
                     break;
             }
         }
+    }
+
+    @Override
+    public void setFormaDePago(FormaDePago pago) {
+        this.FormaPago = FormaPago;
+        if(pago.getClass().equals(Efectivo.class)) tipoPago = 0;
+        else if(pago.getClass().equals(Cheque.class)) tipoPago =1;
+        else if(pago.getClass().equals(NotaDebito.class)) tipoPago =2;
+    }
+
+    @Override
+    public FormaDePago getFormaDePago() {
+        return FormaPago;
+    }
+
+    @Override
+    public void pagar() {
+        this.calculartotalPagar();
+        this.FormaPago.pagar(this.getTotalPagar());
     }
     
 }

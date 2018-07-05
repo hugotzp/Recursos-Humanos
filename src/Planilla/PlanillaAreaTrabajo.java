@@ -15,4 +15,6 @@ public interface PlanillaAreaTrabajo {
     public void setPagoTrabajador(PagoTrabajador trabajador);
     public ArrayList<PagoTrabajador> getPagoTrabajadores();
     public float obtenerTotalPagoPlanilla();
+    public void guardar();
+    public void obtenerPagosPlanilla();
 }

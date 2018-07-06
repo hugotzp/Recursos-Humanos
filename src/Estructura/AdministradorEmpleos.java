@@ -9,6 +9,10 @@ package Estructura;
  *
  * @author Edwin Chocoy
  */
-public class AdaptadorContratarEmpleado {
-    public ContratacionEmpleados medioContratacion;
+public interface AdministradorEmpleos {
+    
+    public int guardarEmpleo(String nombre);
+    
+    public String getEmpleo(int id);
+    
 }

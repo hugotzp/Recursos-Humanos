@@ -26,5 +26,11 @@ public interface Trabajadores {
     public Object obtenerInformacion(int tipo);
     
     public void obtenerPersona();
+    
+    public void obtenerEmpleo();
+    
+    public void setNombreEmpleo(String e);
+    
+    public String getNombreEmpleo();
   
 }

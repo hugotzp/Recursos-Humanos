@@ -10,5 +10,5 @@ package Estructura;
  * @author Edwin Chocoy
  */
 public interface ContratacionEmpleados {
-    public void contratarEmpleado(String idPersona,String idEmpleado,String idDepartamento,float salarioBase);
+    public void contratarEmpleado(Long idPersona,Long idEmpleado,Long idDepartamento,float salarioBase);
 }

@@ -5,10 +5,13 @@
  */
 package Estructura;
 
+import Conexion.Conexion;
 import Estructura.exceptions.NonexistentEntityException;
 import Estructura.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -20,7 +23,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Edwin Chocoy
  */
-public class JpaControllerEmpleo implements Serializable {
+public class JpaControllerEmpleo implements Serializable, AdministradorEmpleos {
 
     public JpaControllerEmpleo(EntityManagerFactory emf) {
         this.emf = emf;
@@ -138,6 +141,34 @@ public class JpaControllerEmpleo implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    @Override
+    public int guardarEmpleo(String nombre) {
+        
+        Empleo e = new Empleo();
+        e.setNombre(nombre);
+        
+        try {
+            create(e);            
+        } catch (Exception ex) {
+            Logger.getLogger(JpaControllerEmpleo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return e.getId().intValue();
+        
+    }
+
+    @Override
+    public String getEmpleo(int id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Empleo.class, id).getNombre();
+        } finally {
+            em.close();
+        }
+        
+        
     }
     
 }

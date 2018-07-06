@@ -20,7 +20,7 @@ import javax.persistence.criteria.Root;
  *
  * @author Edwin Chocoy
  */
-public class JpaControllerTrabajador implements Serializable {
+public class JpaControllerTrabajador implements Serializable, ContratacionEmpleados, AdministradorTrabajador  {
 
     public JpaControllerTrabajador(EntityManagerFactory emf) {
         this.emf = emf;
@@ -139,6 +139,22 @@ public class JpaControllerTrabajador implements Serializable {
         EntityManager em = getEntityManager();
         TypedQuery<Trabajador> query = em.createNamedQuery("obtenerTrabajadoresDerpartamento",Trabajador.class);
         return query.setParameter("idDepa", idDepa).getResultList();
+    }
+
+    @Override
+    public void contratarEmpleado(Long idPersona, Long idEmpleado, Long idDepartamento, float salarioBase) {
+        Trabajador t = new Trabajador();
+        t.setIdPersona(idPersona);
+        t.setIdEmpleo(idEmpleado);
+        t.setIdDepartamento(idDepartamento);
+        t.setSalario(salarioBase);
+        
+        create(t);
+    }
+
+    @Override
+    public Trabajador getTrabajador(Long id) {
+        return findTrabajador(id);
     }
     
 }

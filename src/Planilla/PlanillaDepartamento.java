@@ -12,6 +12,7 @@ import OtrasClases.Iterator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,9 +51,8 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
     @Transient
     private String nombreSector;
     
-    public PlanillaDepartamento(String nombre,Date fecha,Long idDepartamento){
+    public PlanillaDepartamento(String nombre,Long idDepartamento){
         this.nombreSector = nombre;
-        this.fecha = fecha;
         this.Departamento_idDepartamento = idDepartamento;
         this.Trabajadores = new ArrayList<>();
     }
@@ -141,6 +141,10 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
     public void obtenerPagosPlanilla() {
         Conexion con = Conexion.getConexion();
         JpaControllerPago pagos = new JpaControllerPago(con.getEMF());
-        Trabajadores.addAll(pagos.findPagosPlanilla(id));
+        List<PagoEmpleado> lista = pagos.findPagosPlanilla(id);
+        for(PagoEmpleado pago : lista){
+            pago.obtenerVariaciones();
+        }
+        Trabajadores.addAll(lista);
     }
 }

@@ -6,7 +6,9 @@
 package Planilla;
 
 import Conexion.Conexion;
+import Estructura.AdministradorDepartamentos;
 import Estructura.Departamentos;
+import Estructura.Trabajador;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -18,6 +20,7 @@ import java.util.Iterator;
 public class PlanillaEmpresa {
     Date fecha;
     ArrayList<PlanillaAreaTrabajo> Planillas;
+    AdministradorDepartamentos AdaptadorDepartamentos; 
     
     public PlanillaEmpresa(Date fecha){
         this.fecha = fecha;
@@ -27,6 +30,31 @@ public class PlanillaEmpresa {
     public void setPlanilla(PlanillaAreaTrabajo planilla){
         this.Planillas.add(planilla);
     }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setPlanillas(ArrayList<PlanillaAreaTrabajo> Planillas) {
+        this.Planillas = Planillas;
+    }
+
+    public void setAdaptadorDepartamentos(AdministradorDepartamentos AdaptadorDepartamentos) {
+        this.AdaptadorDepartamentos = AdaptadorDepartamentos;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public ArrayList<PlanillaAreaTrabajo> getPlanillas() {
+        return Planillas;
+    }
+
+    public AdministradorDepartamentos getAdaptadorDepartamentos() {
+        return AdaptadorDepartamentos;
+    }
+    
     
     public void mostrarPlanilla(){
         
@@ -52,6 +80,13 @@ public class PlanillaEmpresa {
     }
     
     public void obtenerPlanillaBase(){
+        Conexion con = Conexion.getConexion();
+        JpaControllerPlanilla p = new JpaControllerPlanilla(con.getEMF());
+        ArrayList<Departamentos> departamentosOrganizacion = AdaptadorDepartamentos.getDepartamentos();
+        for (Departamentos departamento : departamentosOrganizacion) {
+            PlanillaDepartamento planilla = p.findPlanillaDepartamento(departamento.getId());
+            planilla.setNombreSector(departamento.getNombre());
+        }
         
     }
     

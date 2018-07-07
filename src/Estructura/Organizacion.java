@@ -17,7 +17,7 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
 
     public String Nombre;
     public String TipoSociedad;
-    public ArrayList<Departamentos> Departamentos;
+    public ArrayList<Departamentos> Departamentos; 
     
     public ArrayList cargarEmpleados(ArrayList<Departamentos> deps){
         
@@ -38,6 +38,7 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
     @Override
     public void setDepartamento(Departamentos departamento) {
         Departamentos.add(departamento);
+        guardarDepartamentos();
     }
 
     @Override
@@ -51,11 +52,11 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
 
     @Override
     public ArrayList getEstructura() {
+        if(this.Departamentos==null){
+            crearEstructura();
+        }
         
-        crearEstructura();
-
-        return (Departamentos);
-        
+        return Departamentos;            
     }
     
     @Override

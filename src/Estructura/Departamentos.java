@@ -114,7 +114,7 @@ public class Departamentos implements AreaDeTrabajo, Serializable {
 
     @Override
     public String toString() {
-        return "Departamentos[id="+id+", nombre: "+Nombre+" ]";
+        return Nombre;
     } 
     
 }

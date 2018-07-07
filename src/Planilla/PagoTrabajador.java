@@ -5,6 +5,10 @@
  */
 package Planilla;
 
+import Estructura.Trabajadores;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  *
  * @author Hugo
@@ -12,7 +16,7 @@ package Planilla;
 public interface PagoTrabajador {
     public float getTotalAPagar();
     public void setVariacionSalarial(VariacionSalarial variacion);
-    public void setEmpleado(Empleo empleado);
+    public void setEmpleado(Trabajadores empleado);
     public void setTotalPagar(float total);
     public void calculartotalPagar();
     public void obtenerVariaciones();
@@ -21,4 +25,6 @@ public interface PagoTrabajador {
     public void setFormaDePago(FormaDePago pago);
     public FormaDePago getFormaDePago();
     public void pagar();
+    public Hashtable<String,ConstructorVariacionSalarial> getVariacionSalarial();
+    public Trabajadores getTrabajador();
 }

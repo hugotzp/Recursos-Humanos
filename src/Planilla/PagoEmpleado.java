@@ -6,10 +6,12 @@
 package Planilla;
 
 import Conexion.Conexion;
+import Estructura.Trabajadores;
 import OtrasClases.IterableCollection;
 import OtrasClases.Iterator;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,16 +50,17 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     @Transient
     private FormaDePago FormaPago;
     @Transient
-    private Empleo Trabajador;
+    private Trabajadores Trabajador;
     @Transient
     private ArrayList<VariacionSalarial> VariacionesSalariales;
 
     public PagoEmpleado() {
         this.id = -1L;
+        this.VariacionesSalariales = new ArrayList<>();
     }
 
     
-    public PagoEmpleado(FormaDePago pago,Empleo Trabajador){
+    public PagoEmpleado(FormaDePago pago,Trabajadores Trabajador){
         this.TotalPagar = 0;
         this.FormaPago = pago;
         this.Trabajador = Trabajador;
@@ -89,7 +92,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
         return Planilla_idPlanillaGeneral;
     }
 
-    public Empleo getTrabajador() {
+    public Trabajadores getTrabajador() {
         return Trabajador;
     }
 
@@ -117,7 +120,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
         this.FormaPago = FormaPago;
     }
 
-    public void setTrabajador(Empleo Trabajador) {
+    public void setTrabajador(Trabajadores Trabajador) {
         this.Trabajador = Trabajador;
     }
 
@@ -163,7 +166,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     }
 
     @Override
-    public void setEmpleado(Empleo empleado) {
+    public void setEmpleado(Trabajadores empleado) {
         this.Trabajador = empleado;
     }
 
@@ -176,7 +179,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     public void calculartotalPagar() {
         float auxTotal = 0;
         //Obtener sueldo base
-        //auxTotal += Trabajador.();
+        auxTotal += Trabajador.getSalario();
         IteradorVariaciones lista = (IteradorVariaciones) crearIterador();
         while(lista.hasMore()){
             auxTotal = lista.getNext().modificarSalario(auxTotal);
@@ -288,6 +291,28 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     public void pagar() {
         this.calculartotalPagar();
         this.FormaPago.pagar(this.getTotalPagar());
+    }
+
+    @Override
+    public Hashtable<String, ConstructorVariacionSalarial> getVariacionSalarial() {
+        FabricaVariacionesSalariales fab = new FabricaVariacionesSalariales();
+        ConstructorVariacionSalarial bon = fab.crearObjeto(FabricaVariacionesSalariales.bonificacion);
+        bon.buildPart(ConstructorBonificacion.pValorBono,new Float(250));
+        ConstructorVariacionSalarial ig = fab.crearObjeto(FabricaVariacionesSalariales.igss);
+        ig.buildPart(ConstructorIgss.pSalarioBase, Trabajador.getSalario());
+        ConstructorVariacionSalarial hor = fab.crearObjeto(FabricaVariacionesSalariales.horasExtra);
+        hor.buildPart(ConstructorHorasExtra.pSalarioBase, Trabajador.getSalario());
+        ConstructorVariacionSalarial pres = fab.crearObjeto(FabricaVariacionesSalariales.prestamo);
+        this.setVariacionSalarial(bon.getVariacion());
+        this.setVariacionSalarial(ig.getVariacion());
+        this.setVariacionSalarial(hor.getVariacion());
+        this.setVariacionSalarial(pres.getVariacion());
+        Hashtable<String,ConstructorVariacionSalarial> variaciones = new Hashtable<>();
+        variaciones.put(FabricaVariacionesSalariales.igss, ig);
+        variaciones.put(FabricaVariacionesSalariales.bonificacion, bon);
+        variaciones.put(FabricaVariacionesSalariales.horasExtra, hor);
+        variaciones.put(FabricaVariacionesSalariales.prestamo, pres);
+        return variaciones;
     }
     
 }

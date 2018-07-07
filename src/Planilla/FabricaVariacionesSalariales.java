@@ -10,10 +10,28 @@ package Planilla;
  * @author Hugo
  */
 public class FabricaVariacionesSalariales implements FactoryVariacionesSalariales{
-
+    public static final String bonificacion ="bon";
+    public static final String igss ="igss";
+    public static final String prestamo ="pres";
+    public static final String horasExtra ="horas";
     @Override
-    public ConstructorVariacionSalarial crearObjeto(int tipo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ConstructorVariacionSalarial crearObjeto(String tipo) {
+        ConstructorVariacionSalarial con =null;
+        switch(tipo){
+            case bonificacion:
+                con = new ConstructorBonificacion(new Bonificacion());
+                break;
+            case igss:
+                con = new ConstructorIgss(new IGSS());
+                break;
+            case prestamo:
+                con = new ConstructorPrestamo(new Prestamo());
+                break;
+            case horasExtra:
+                con = new ConstructorHorasExtra(new HorasExtra());
+                break;
+        }
+        return con;
     }
     
 }

@@ -22,8 +22,8 @@ public class PlanillaEmpresa {
     ArrayList<PlanillaAreaTrabajo> Planillas;
     AdministradorDepartamentos AdaptadorDepartamentos; 
     
-    public PlanillaEmpresa(Date fecha){
-        this.fecha = fecha;
+    public PlanillaEmpresa(){
+        this.fecha = new Date();
         this.Planillas = new ArrayList<>();
     }
     
@@ -74,6 +74,7 @@ public class PlanillaEmpresa {
         JpaControllerPlanilla p = new JpaControllerPlanilla(con.getEMF());
         for(PlanillaAreaTrabajo area : Planillas){
             PlanillaDepartamento dep = (PlanillaDepartamento) area;
+            dep.setFecha(fecha);
             if(dep.getId()<0) p.create(dep);
             dep.guardar();
         }
@@ -82,15 +83,29 @@ public class PlanillaEmpresa {
     public void obtenerPlanillaBase(){
         Conexion con = Conexion.getConexion();
         JpaControllerPlanilla p = new JpaControllerPlanilla(con.getEMF());
-        ArrayList<Departamentos> departamentosOrganizacion = AdaptadorDepartamentos.getDepartamentos();
+        ArrayList<Departamentos> departamentosOrganizacion = AdaptadorDepartamentos.getIdDepartamentos();
         for (Departamentos departamento : departamentosOrganizacion) {
-            PlanillaDepartamento planilla = p.findPlanillaDepartamento(departamento.getId());
+            PlanillaDepartamento planilla = p.obtenerPlanilla(departamento.getId(),fecha);
             planilla.setNombreSector(departamento.getNombre());
+            planilla.obtenerPagosPlanilla();
+            Planillas.add(planilla);
         }
         
     }
     
     public void crearNuevaPlanillaEmpresa(){
-        
+        ArrayList<Departamentos> departamentosOrganizacion = AdaptadorDepartamentos.getEstructura();
+        for (Departamentos departamento : departamentosOrganizacion) {
+            System.out.println(departamento.getNombre());
+            PlanillaDepartamento planilla = new PlanillaDepartamento(departamento.getNombre(), departamento.getId());
+            ArrayList<Trabajador> trabajadores = departamento.getPersonal();
+            for(Trabajador t :trabajadores){
+                System.out.println(t.NombreEmpleo);
+                PagoEmpleado pago = new PagoEmpleado();
+                pago.setTrabajador(t);
+                planilla.setPagoTrabajador(pago);
+            }
+            Planillas.add(planilla);
+        }
     }
 }

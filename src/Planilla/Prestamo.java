@@ -146,11 +146,7 @@ public class Prestamo implements Serializable,VariacionSalarial {
 
     @Override
     public float modificarSalario(float sueldoActual) {
-        if(Total == 0){
-            return sueldoActual - calcularTotal();
-        }else{
-            return sueldoActual - Total;
-        }
+        return sueldoActual - calcularTotal();
     }
     
 }

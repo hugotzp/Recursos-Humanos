@@ -165,9 +165,7 @@ public class HorasExtra implements Serializable,VariacionSalarial {
 
     @Override
     public float modificarSalario(float sueldoActual) {
-        if(total ==0){
-            calcularTotal();
-        }
+        calcularTotal();
         return sueldoActual + total;
     }
     

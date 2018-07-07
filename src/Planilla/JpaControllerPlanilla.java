@@ -7,11 +7,14 @@ package Planilla;
 
 import Planilla.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -28,6 +31,14 @@ public class JpaControllerPlanilla implements Serializable {
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+    
+    public PlanillaDepartamento obtenerPlanilla(Long idDepartamento, Date fecha){
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("encontrarPlanilla",PlanillaDepartamento.class);
+        query.setParameter("idDepartamento", idDepartamento);
+        query.setParameter("pMes", fecha);
+        return (PlanillaDepartamento) query.getSingleResult();
     }
 
     public void create(PlanillaDepartamento planillaDepartamento) {
@@ -120,6 +131,7 @@ public class JpaControllerPlanilla implements Serializable {
             em.close();
         }
     }
+    
 
     public int getPlanillaDepartamentoCount() {
         EntityManager em = getEntityManager();

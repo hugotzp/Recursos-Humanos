@@ -18,6 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -30,6 +31,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "Planilla")
+@NamedQuery(name="encontrarPlanilla",query="SELECT p FROM PlanillaDepartamento p WHERE EXTRACT( MONTH from p.fecha) = EXTRACT(MONTH from :pMes) AND p.Departamento_idDepartamento = :idDepartamento")
 public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollection, Serializable{
     
     @TableGenerator(
@@ -50,6 +52,9 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
     private ArrayList<PagoTrabajador> Trabajadores;
     @Transient
     private String nombreSector;
+
+    public PlanillaDepartamento() {
+    }
     
     public PlanillaDepartamento(String nombre,Long idDepartamento){
         this.nombreSector = nombre;

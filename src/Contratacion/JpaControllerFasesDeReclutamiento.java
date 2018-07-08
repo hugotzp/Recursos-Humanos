@@ -6,13 +6,15 @@
 package Contratacion;
 
 import Contratacion.exceptions.NonexistentEntityException;
-import Contratacion.exceptions.PreexistingEntityException;
+import Estructura.Departamentos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -20,9 +22,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Edwin Chocoy
  */
-public class JpaControllerFase implements Serializable {
+public class JpaControllerFasesDeReclutamiento implements Serializable {
 
-    public JpaControllerFase(EntityManagerFactory emf) {
+    public JpaControllerFasesDeReclutamiento(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,18 +33,13 @@ public class JpaControllerFase implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(CalificacionesAspirantes fase) throws PreexistingEntityException, Exception {
+    public void create(FasesDeReclutamiento fasesDeReclutamiento) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(fase);
+            em.persist(fasesDeReclutamiento);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findFase(fase.getId()) != null) {
-                throw new PreexistingEntityException("Fase " + fase + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -50,19 +47,19 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public void edit(CalificacionesAspirantes fase) throws NonexistentEntityException, Exception {
+    public void edit(FasesDeReclutamiento fasesDeReclutamiento) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            fase = em.merge(fase);
+            fasesDeReclutamiento = em.merge(fasesDeReclutamiento);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = fase.getId();
-                if (findFase(id) == null) {
-                    throw new NonexistentEntityException("The fase with id " + id + " no longer exists.");
+                Long id = fasesDeReclutamiento.getIdReclutamiento();
+                if (findFasesDeReclutamiento(id) == null) {
+                    throw new NonexistentEntityException("The fasesDeReclutamiento with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +75,14 @@ public class JpaControllerFase implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CalificacionesAspirantes fase;
+            FasesDeReclutamiento fasesDeReclutamiento;
             try {
-                fase = em.getReference(CalificacionesAspirantes.class, id);
-                fase.getId();
+                fasesDeReclutamiento = em.getReference(FasesDeReclutamiento.class, id);
+                fasesDeReclutamiento.getIdReclutamiento();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The fase with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The fasesDeReclutamiento with id " + id + " no longer exists.", enfe);
             }
-            em.remove(fase);
+            em.remove(fasesDeReclutamiento);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +91,19 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public List<CalificacionesAspirantes> findFaseEntities() {
-        return findFaseEntities(true, -1, -1);
+    public List<FasesDeReclutamiento> findFasesDeReclutamientoEntities() {
+        return findFasesDeReclutamientoEntities(true, -1, -1);
     }
 
-    public List<CalificacionesAspirantes> findFaseEntities(int maxResults, int firstResult) {
-        return findFaseEntities(false, maxResults, firstResult);
+    public List<FasesDeReclutamiento> findFasesDeReclutamientoEntities(int maxResults, int firstResult) {
+        return findFasesDeReclutamientoEntities(false, maxResults, firstResult);
     }
 
-    private List<CalificacionesAspirantes> findFaseEntities(boolean all, int maxResults, int firstResult) {
+    private List<FasesDeReclutamiento> findFasesDeReclutamientoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(CalificacionesAspirantes.class));
+            cq.select(cq.from(FasesDeReclutamiento.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,26 +115,36 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public CalificacionesAspirantes findFase(Long id) {
+    public FasesDeReclutamiento findFasesDeReclutamiento(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(CalificacionesAspirantes.class, id);
+            return em.find(FasesDeReclutamiento.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getFaseCount() {
+    public int getFasesDeReclutamientoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<CalificacionesAspirantes> rt = cq.from(CalificacionesAspirantes.class);
+            Root<FasesDeReclutamiento> rt = cq.from(FasesDeReclutamiento.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
+    }
+    
+    public ArrayList obtenerFasesDeReclutamiento(Long id){
+        EntityManager em = getEntityManager();
+        TypedQuery<FasesDeReclutamiento> query = em.createNamedQuery("obtenerFasesDeReclutamiento",FasesDeReclutamiento.class);
+        query.setParameter("id", id);
+        List<FasesDeReclutamiento> fases = query.getResultList();
+
+        return (ArrayList) fases;
+
     }
     
 }

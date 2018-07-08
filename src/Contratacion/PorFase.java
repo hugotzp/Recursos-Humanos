@@ -59,7 +59,7 @@ public class PorFase implements FormaCalificar{
             Aspirantes aspirante = (Aspirantes) aspirantes.getNext();
             IteradorFases fases = (IteradorFases) aspirante.crearIterador();
             while(fases.hasMore()){
-                FaseReclutamiento fase = fases.getNext();
+                Calificacion fase = fases.getNext();
                 if(fasesImportante.contains(fase.getNumeroFase())){
                     aux+= fases.getNext().getPuntuacionDesempeño()*2;
                     conteo+=2;

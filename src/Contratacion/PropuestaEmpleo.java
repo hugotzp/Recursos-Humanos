@@ -10,28 +10,40 @@ package Contratacion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
  * @author Edwin Chocoy
  */
 @Entity
+@Table(name="Propuesta")
 public class PropuestaEmpleo implements Puesto,Serializable{
-
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaPropuesta",
+            allocationSize = 1,
+            initialValue= 1
+    )
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaPropuesta")
+    @Column(name="idPropuesta")
     private Long id;
+    @Column(name="Empleo_idEmpleo")
+    private Long idEmpleo;
+    @Column(name="Departamento_idDepartamento")
+    private Long idDepartamento;
     
-    public String Puesto;
-
+    public String Descripcion;
     public String Requisitos;
     public float Salario;
-    public String Descripcion;
+    
+    public String Puesto;
+    
+    
     
     
     @Override
-
     public void setNombre(String nombre) {
         this.Puesto=nombre;
     }
@@ -48,13 +60,10 @@ public class PropuestaEmpleo implements Puesto,Serializable{
 
     @Override
     public String getDescripcion() {
-        return Descripcion;
-
-        
+        return Descripcion;   
     }
 
     @Override
-
     public void setSalario(float valor) {
         this.Salario=valor;
 
@@ -62,9 +71,7 @@ public class PropuestaEmpleo implements Puesto,Serializable{
 
     @Override
     public float getSalario() {
-
-        return Salario;
-        
+        return Salario;        
     }
 
     @Override
@@ -77,12 +84,33 @@ public class PropuestaEmpleo implements Puesto,Serializable{
         return Requisitos;
     }
 
+    //BD
+    
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIdEmpleo(Long idEmpleo) {
+        this.idEmpleo = idEmpleo;
+    }
+
+    public void setIdDepartamento(Long idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdEmpleo() {
+        return idEmpleo;
     }
-   
+
+    public Long getIdDepartamento() {
+        return idDepartamento;
+    }
+    
+    
+    
 }

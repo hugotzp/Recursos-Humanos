@@ -16,19 +16,17 @@ public interface Reclutamiento {
     
     public void contratar();
     
-    public void setFaseReclutamiento(int numero);
-    
-    public ArrayList obtenerFinalistas();
+    public void setFaseReclutamiento(int numero);    
     
     public void setEvaluacion(Evaluacion evaluacion);
-
-    public IteradorAspirantes obtenerAspirantes();
-    
+  
     public void cargarAspirantes();
     
     public void cargarPuesto();
     
     public void cargarFases();
     
+    public Object obtenerAspirantes();
     
+    public Object obtenerFinalistas();   
 }

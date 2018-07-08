@@ -83,5 +83,11 @@ public class Organizacion implements Empresa, AdministradorDepartamentos{
         }
         
     }
+    
+    public Departamentos getDepartamento(Long id){
+        Conexion con = Conexion.getConexion();
+        JpaControllerDepartamentos d = new JpaControllerDepartamentos(con.getEMF());
+        return d.findDepartamentos(id);
+    }
   
 }

@@ -17,4 +17,6 @@ public interface AdministradorDepartamentos {
     
     public ArrayList getIdDepartamentos();
     
+    public Departamentos getDepartamento(Long id);
+    
 }

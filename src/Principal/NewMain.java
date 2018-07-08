@@ -21,9 +21,9 @@ public class NewMain {
         // TODO code application logic here
         
         Organizacion o = new Organizacion();
-        o.Departamentos=o.getDepartamentos();       
+        o.Departamentos=o.getEstructura();       
         
-        System.out.println(o.Departamentos.get(0).Trabajadores.get(0).getPersona().toString());
+        System.out.println(o.Departamentos.get(0).Trabajadores.get(0).getNombreEmpleo());
         
         /*Departamentos d = new Departamentos();
         d.setNombre("Informatica");

@@ -5,19 +5,24 @@
  */
 package Planilla;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Hugo
  */
 public class VentanaCrearPlanilla extends javax.swing.JPanel {
-    
+    PlanillaEmpresa empresa;
     /**
      * Creates new form ModeloTablaPlanilla
      */
     public VentanaCrearPlanilla() {
         initComponents();
-        ComponenteTablaPlanillaNueva m = new ComponenteTablaPlanillaNueva();
+        empresa = new PlanillaEmpresa();
+        ModeloTablaPlanillaNueva m = new ModeloTablaPlanillaNueva(empresa);
         Tabla.setModel(m);
+        Fecha.setCalendar(new GregorianCalendar());
+        
     }
 
     /**
@@ -39,6 +44,11 @@ public class VentanaCrearPlanilla extends javax.swing.JPanel {
         jLabel1.setText("Fecha: ");
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -57,12 +67,16 @@ public class VentanaCrearPlanilla extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(6, 6, 6)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(Fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -96,6 +110,11 @@ public class VentanaCrearPlanilla extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        empresa.setFecha(Fecha.getDate());
+        empresa.GuardarPlanilla();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

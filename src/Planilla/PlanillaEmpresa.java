@@ -74,8 +74,7 @@ public class PlanillaEmpresa {
         JpaControllerPlanilla p = new JpaControllerPlanilla(con.getEMF());
         for(PlanillaAreaTrabajo area : Planillas){
             PlanillaDepartamento dep = (PlanillaDepartamento) area;
-            dep.setFecha(fecha);
-            if(dep.getId()<0) p.create(dep);
+            if(dep.getId()<1)p.create(dep);
             dep.guardar();
         }
     }
@@ -87,6 +86,7 @@ public class PlanillaEmpresa {
         for (Departamentos departamento : departamentosOrganizacion) {
             PlanillaDepartamento planilla = p.obtenerPlanilla(departamento.getId(),fecha);
             planilla.setNombreSector(departamento.getNombre());
+            planilla.setDepartamento_idDepartamento(departamento.getId());
             planilla.obtenerPagosPlanilla();
             Planillas.add(planilla);
         }
@@ -96,12 +96,11 @@ public class PlanillaEmpresa {
     public void crearNuevaPlanillaEmpresa(){
         ArrayList<Departamentos> departamentosOrganizacion = AdaptadorDepartamentos.getEstructura();
         for (Departamentos departamento : departamentosOrganizacion) {
-            System.out.println(departamento.getNombre());
             PlanillaDepartamento planilla = new PlanillaDepartamento(departamento.getNombre(), departamento.getId());
             ArrayList<Trabajador> trabajadores = departamento.getPersonal();
             for(Trabajador t :trabajadores){
-                System.out.println(t.NombreEmpleo);
                 PagoEmpleado pago = new PagoEmpleado();
+                pago.setTrabajador_idTrabajador(t.getId());
                 pago.setTrabajador(t);
                 planilla.setPagoTrabajador(pago);
             }

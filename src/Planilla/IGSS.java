@@ -47,6 +47,7 @@ public class IGSS implements Serializable,VariacionSalarial {
     private float Total;
     
     public IGSS(){
+        this.id = 0L;
         this.salarioBase = 0;
         this.horaExtra = 0;
         this.Total = 0;

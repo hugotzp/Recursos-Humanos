@@ -48,6 +48,7 @@ public class HorasExtra implements Serializable,VariacionSalarial {
     private Long Pago_idPago;
     
     public HorasExtra(){
+        this.id = 0L;
         this.numeroHorasExtra = 0;
         this.salarioBase = 0;
         this.total = 0;

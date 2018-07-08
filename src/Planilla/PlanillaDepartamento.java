@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,9 +56,16 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
     private String nombreSector;
 
     public PlanillaDepartamento() {
+        this.id = 0L;
+        this.fecha = new Date();
+        this.nombreSector = "";
+        this.Departamento_idDepartamento = 0L;
+        this.Trabajadores = new ArrayList<>();
     }
     
     public PlanillaDepartamento(String nombre,Long idDepartamento){
+        this.id = 0L;
+        this.fecha = new Date();
         this.nombreSector = nombre;
         this.Departamento_idDepartamento = idDepartamento;
         this.Trabajadores = new ArrayList<>();
@@ -135,10 +144,18 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
         IteradorPlanilla iterador = (IteradorPlanilla) crearIterador();
         while(iterador.hasMore()){
             PagoEmpleado pago = (PagoEmpleado) iterador.getNext();
-            if(pago.getId()<0){
+            pago.setPlanilla_idPlanillaGeneral(id);
+            if(pago.getId()<=0){
                 auxPago.create(pago);
+                pago.guardarBase();
+            }else{
+                try {
+                    pago.guardarBase();
+                    auxPago.edit(pago);
+                } catch (Exception ex) {
+                    Logger.getLogger(PlanillaDepartamento.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-             pago.guardarBase();
         }
     }
 
@@ -149,6 +166,8 @@ public class PlanillaDepartamento implements PlanillaAreaTrabajo,IterableCollect
         List<PagoEmpleado> lista = pagos.findPagosPlanilla(id);
         for(PagoEmpleado pago : lista){
             pago.obtenerVariaciones();
+            pago.obtenerFormaPago();
+            pago.obtenerTrabajador();
         }
         Trabajadores.addAll(lista);
     }

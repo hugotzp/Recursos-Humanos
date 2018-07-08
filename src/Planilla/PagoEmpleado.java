@@ -6,12 +6,17 @@
 package Planilla;
 
 import Conexion.Conexion;
+import Estructura.AdaptadorTrabajador;
+import Estructura.Trabajador;
 import Estructura.Trabajadores;
 import OtrasClases.IterableCollection;
 import OtrasClases.Iterator;
+import Planilla.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,17 +60,18 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
     private ArrayList<VariacionSalarial> VariacionesSalariales;
 
     public PagoEmpleado() {
-        this.id = -1L;
+        this.id = 0L;
+        this.tipoPago = -1;
+        this.TotalPagar = 0;
         this.VariacionesSalariales = new ArrayList<>();
     }
 
     
-    public PagoEmpleado(FormaDePago pago,Trabajadores Trabajador){
+    public PagoEmpleado(Trabajadores Trabajador){
         this.TotalPagar = 0;
-        this.FormaPago = pago;
         this.Trabajador = Trabajador;
         this.VariacionesSalariales = new ArrayList<>();
-        this.id = -1L;
+        this.id = 0L;
     }
     
     public Long getId() {
@@ -233,6 +239,7 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
 
     @Override
     public void guardarBase() {
+        System.out.println("tipo pago:"+ tipoPago);
         Conexion con = Conexion.getConexion();
         JpaControllerBonificacion bon = new JpaControllerBonificacion(con.getEMF());
         JpaControllerIGSS igss = new JpaControllerIGSS(con.getEMF());
@@ -244,39 +251,87 @@ public class PagoEmpleado implements Serializable,PagoTrabajador,IterableCollect
             switch(var.getClass().getName()){
                 case "Planilla.Bonificacion":
                     Bonificacion auxBon = (Bonificacion) var;
-                    if(auxBon.getId() < 0){
+                    if(auxBon.getId() <= 0){
                         auxBon.setPago_idPago(id);
                         bon.create(auxBon);
+                    }else{
+                        try {
+                            bon.edit(auxBon);
+                        } catch (Exception ex) {
+                            Logger.getLogger(PagoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     break;
                 case "Planilla.IGSS":
                     IGSS auxIgss = (IGSS) var;
-                    if(auxIgss.getId()<0){
+                    if(auxIgss.getId()<=0){
                         auxIgss.setPago_idPago(id);
                         igss.create(auxIgss);
+                    }else{
+                        try {
+                            igss.edit(auxIgss);
+                        } catch (Exception ex) {
+                            Logger.getLogger(PagoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     break;
                 case "Planilla.Prestamo":
                     Prestamo auxPres = (Prestamo) var;
-                    if(auxPres.getId()<0){
+                    if(auxPres.getId()<=0){
                         auxPres.setPago_idPago(id);
                         pres.create(auxPres);
+                    }else{
+                        try {
+                            pres.edit(auxPres);
+                        } catch (Exception ex) {
+                            Logger.getLogger(PagoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     break;
                 case "Planilla.HorasExtra":
                     HorasExtra auxHoras = (HorasExtra) var;
-                    if(auxHoras.getId()<0){
+                    if(auxHoras.getId()<=0){
                         auxHoras.setPago_idPago(id);
                         horas.create(auxHoras);
+                    }else{
+                        try {
+                            horas.edit(auxHoras);
+                        } catch (Exception ex) {
+                            Logger.getLogger(PagoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     break;
             }
         }
+        JpaControllerEfectivo ef = new JpaControllerEfectivo(con.getEMF());
+        JpaControllerCheque ch = new JpaControllerCheque(con.getEMF());
+        JpaControllerNotaDebito no = new JpaControllerNotaDebito(con.getEMF());
+        switch(tipoPago){
+            case 0:
+                ((Efectivo) FormaPago).setPago_idPago(id);
+                ef.create((Efectivo) FormaPago);
+                break; 
+            case 1:
+                ((Cheque) FormaPago).setPago_idPago(id);
+                ch.create((Cheque) FormaPago);
+                break;
+            case 2:
+                ((NotaDebito) FormaPago).setPago_idPago(id);
+                no.create((NotaDebito) FormaPago);
+                break;
+        }
+    }
+    
+    public void obtenerTrabajador(){
+        AdaptadorTrabajador adap = new AdaptadorTrabajador();
+        Trabajador a = adap.getTrabajador(Trabajador_idTrabajador);
+        a.obtenerPersona();
+        this.Trabajador = a;
     }
 
     @Override
     public void setFormaDePago(FormaDePago pago) {
-        this.FormaPago = FormaPago;
+        this.FormaPago = pago;
         if(pago.getClass().equals(Efectivo.class)) tipoPago = 0;
         else if(pago.getClass().equals(Cheque.class)) tipoPago =1;
         else if(pago.getClass().equals(NotaDebito.class)) tipoPago =2;

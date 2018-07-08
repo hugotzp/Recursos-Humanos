@@ -34,7 +34,8 @@ public class JpaControllerEfectivo implements Serializable {
     public Efectivo findFormaPago(Long id){
         EntityManager em = getEntityManager();
         TypedQuery<Efectivo> query = em.createNamedQuery("EfectivoTrabajador",Efectivo.class);
-        return query.setParameter("idPago",id).getResultList().get(0);
+        List lista = query.setParameter("idPago",id).getResultList();
+        return (Efectivo) lista.get(lista.size()-1);
     }
 
     public void create(Efectivo efectivo) {

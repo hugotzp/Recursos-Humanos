@@ -5,8 +5,7 @@
  */
 package Contratacion;
 
-import Estructura.Persona;
-import Estructura.Personal;
+import Personas.*;
 import java.util.Date;
 /**
  *

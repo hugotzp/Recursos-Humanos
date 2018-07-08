@@ -17,16 +17,19 @@ import java.util.ArrayList;
  */
 public interface PersonasInteresadas {
     
+    public void setPersona(Persona persona);
+    
     public void setTipoProceso(boolean tipo);
     
-    public boolean getTipoProceso();
+    public void setFasesReclutamiento(Calificacion fase);
     
-    public void setFasesReclutamiento(FaseReclutamiento fase);
+    public boolean getTipoProceso();
 
     public ArrayList getFasesReclutamiento();
     
     public void cargarFaseReclutamiento();
     
-    public void setPersona(Persona persona);
+    public void cargarPersona();
+    
     
 }

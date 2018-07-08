@@ -5,14 +5,18 @@
  */
 package Contratacion;
 
-import Contratacion.exceptions.NonexistentEntityException;
-import Contratacion.exceptions.PreexistingEntityException;
+import Conexion.exceptions.NonexistentEntityException;
+import Conexion.exceptions.PreexistingEntityException;
+import Contratacion.CalificacionesAspirantes;
+import Estructura.Departamentos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -20,9 +24,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Edwin Chocoy
  */
-public class JpaControllerFase implements Serializable {
+public class JpaControllerCalificacionesAspirantes implements Serializable {
 
-    public JpaControllerFase(EntityManagerFactory emf) {
+    public JpaControllerCalificacionesAspirantes(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,16 +35,16 @@ public class JpaControllerFase implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(CalificacionesAspirantes fase) throws PreexistingEntityException, Exception {
+    public void create(CalificacionesAspirantes calificacionesAspirantes) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(fase);
+            em.persist(calificacionesAspirantes);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findFase(fase.getId()) != null) {
-                throw new PreexistingEntityException("Fase " + fase + " already exists.", ex);
+            if (findCalificacionesAspirantes(calificacionesAspirantes.getId()) != null) {
+                throw new PreexistingEntityException("CalificacionesAspirantes " + calificacionesAspirantes + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -50,19 +54,19 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public void edit(CalificacionesAspirantes fase) throws NonexistentEntityException, Exception {
+    public void edit(CalificacionesAspirantes calificacionesAspirantes) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            fase = em.merge(fase);
+            calificacionesAspirantes = em.merge(calificacionesAspirantes);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = fase.getId();
-                if (findFase(id) == null) {
-                    throw new NonexistentEntityException("The fase with id " + id + " no longer exists.");
+                Long id = calificacionesAspirantes.getId();
+                if (findCalificacionesAspirantes(id) == null) {
+                    throw new NonexistentEntityException("The calificacionesAspirantes with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +82,14 @@ public class JpaControllerFase implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CalificacionesAspirantes fase;
+            CalificacionesAspirantes calificacionesAspirantes;
             try {
-                fase = em.getReference(CalificacionesAspirantes.class, id);
-                fase.getId();
+                calificacionesAspirantes = em.getReference(CalificacionesAspirantes.class, id);
+                calificacionesAspirantes.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The fase with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The calificacionesAspirantes with id " + id + " no longer exists.", enfe);
             }
-            em.remove(fase);
+            em.remove(calificacionesAspirantes);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,15 +98,15 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public List<CalificacionesAspirantes> findFaseEntities() {
-        return findFaseEntities(true, -1, -1);
+    public List<CalificacionesAspirantes> findCalificacionesAspirantesEntities() {
+        return findCalificacionesAspirantesEntities(true, -1, -1);
     }
 
-    public List<CalificacionesAspirantes> findFaseEntities(int maxResults, int firstResult) {
-        return findFaseEntities(false, maxResults, firstResult);
+    public List<CalificacionesAspirantes> findCalificacionesAspirantesEntities(int maxResults, int firstResult) {
+        return findCalificacionesAspirantesEntities(false, maxResults, firstResult);
     }
 
-    private List<CalificacionesAspirantes> findFaseEntities(boolean all, int maxResults, int firstResult) {
+    private List<CalificacionesAspirantes> findCalificacionesAspirantesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -118,7 +122,7 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public CalificacionesAspirantes findFase(Long id) {
+    public CalificacionesAspirantes findCalificacionesAspirantes(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(CalificacionesAspirantes.class, id);
@@ -127,7 +131,7 @@ public class JpaControllerFase implements Serializable {
         }
     }
 
-    public int getFaseCount() {
+    public int getCalificacionesAspirantesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -138,6 +142,13 @@ public class JpaControllerFase implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public ArrayList ObtenerFasesAspirante(Long idAspirante){
+        EntityManager em = getEntityManager();
+        TypedQuery<CalificacionesAspirantes> query = em.createNamedQuery("obtenerCalificaciones",CalificacionesAspirantes.class);
+        query.setParameter("id", idAspirante);
+        return (ArrayList) query.getResultList();
     }
     
 }

@@ -39,8 +39,5 @@ class IteradorAspirantes implements Iterator{
         posicionActual = 0;
     }
     
-    @Override
-    public void reset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }

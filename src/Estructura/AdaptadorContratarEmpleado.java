@@ -11,7 +11,7 @@ import Conexion.Conexion;
  *
  * @author Edwin Chocoy
  */
-public class AdaptadorContratarEmpleo {
+public class AdaptadorContratarEmpleado {
     private ContratacionEmpleados medioContratacion;
     private AdministradorEmpleos admonEmpleos;
     

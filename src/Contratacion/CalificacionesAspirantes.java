@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -19,13 +20,13 @@ import javax.persistence.Id;
  * @author Edwin Chocoy
  */
 @Entity
-public class Fase implements FaseReclutamiento,MetodosConstructorFases,Serializable{
+@NamedQuery(name="obtenerCalificaciones",query="SELECT c FROM CalificacionesAspirantes c WHERE c.idAspirante = :id")
+public class CalificacionesAspirantes implements Calificacion,MetodosConstructorFases,Serializable{
 
     @Id
     private Long id;
-    
+    private Long idAspirante;
     public int numeroFase;
-    public String nombreFase;
     public Date fechaInicio;
     public Date fechaFin;
     public int desempeño;
@@ -35,10 +36,6 @@ public class Fase implements FaseReclutamiento,MetodosConstructorFases,Serializa
         this.numeroFase=fase;
     }
 
-    @Override
-    public void setNombreFase(String nombre) {
-        this.nombreFase=nombre;
-    }
 
     @Override
     public void setPuntuacionDesempeño(int valor) {
@@ -58,11 +55,6 @@ public class Fase implements FaseReclutamiento,MetodosConstructorFases,Serializa
     @Override
     public int getNumeroFase() {
         return numeroFase;
-    }
-
-    @Override
-    public String getNombreFase() {
-        return nombreFase;
     }
 
     @Override

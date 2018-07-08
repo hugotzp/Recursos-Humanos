@@ -5,7 +5,10 @@
  */
 package Contratacion;
 
+import Conexion.Conexion;
+import Estructura.AdaptadorContratarEmpleado;
 import java.util.ArrayList;
+
 
 /**
  *
@@ -15,8 +18,12 @@ public class Contratacion implements ModuloContratacion {
    
     JpaControllerReclutar jpaReclutar;
     
-    public void Contratacion(JpaControllerReclutar jpa){
-        this.jpaReclutar=jpa;
+    public ArrayList reclutamientos;
+    public AdaptadorContratarEmpleado MedioContratacion;
+    
+    public void Contratacion(){
+        Conexion c = Conexion.getConexion();       
+        JpaControllerReclutar reclutar = new JpaControllerReclutar(c.getEMF());
     }
     
     

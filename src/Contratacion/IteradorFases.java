@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class IteradorFases implements Iterator {
     
-    ArrayList<FaseReclutamiento> fases;
+    ArrayList<Calificacion> fases;
     private int posicionActual=0;
     
     
@@ -23,8 +23,8 @@ public class IteradorFases implements Iterator {
     }
     
     @Override
-    public FaseReclutamiento getNext() {
-        FaseReclutamiento obj = null;
+    public Calificacion getNext() {
+        Calificacion obj = null;
         if( (this.posicionActual ) < this.fases.size() )
         {
             obj = this.fases.get(this.posicionActual);

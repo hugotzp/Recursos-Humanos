@@ -45,12 +45,7 @@ public class Modulo_Estructura extends javax.swing.JFrame {
         jComboBoxDepartamentos.setModel(new ModeloComboBoxDepartamentos(organizacion.getEstructura(),modeloTablaTrabajadores) );
         
         
-        
-        jPanelPrincipal.setVisible(true);
-        
-        jPanelDepatementos.setVisible(false);
-        jPanelTrabajadores.setVisible(false);
-        jPanelPersonal.setVisible(false);
+        setLblColor(label_Departamentos); 
     }
 
     /**
@@ -230,7 +225,7 @@ public class Modulo_Estructura extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Visualizar Depatamentos");
+        jLabel1.setText("Visualizar Departamentos");
 
         jLabelActuzalizarTablaDepartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Refresh_25px_1.png"))); // NOI18N
         jLabelActuzalizarTablaDepartamentos.setText("Actualizar");

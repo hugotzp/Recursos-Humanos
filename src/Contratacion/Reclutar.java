@@ -8,43 +8,68 @@
 package Contratacion;
 
 
+import Conexion.Conexion;
+import Estructura.AdaptadorContratarEmpleado;
+import Estructura.JpaControllerTrabajador;
+import OtrasClases.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 /**
  *
  * @author Edwin Chocoy
  */
 @Entity
+@Table(name="Reclutamiento")
 public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     
-    public Date fechaContratacion;
-    public Date fechaInicio;
-    public Date fechaFin;
-    public String Departamento;
-
-    public ArrayList numeroFases;
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaReclutamiento",
+            allocationSize = 1,
+            initialValue= 1
+    )
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaDepartamento")
+    @Column(name="idDepartamento")
+    private Long id;
     
+    @Temporal(TemporalType.DATE)
+    public Date fechaContratacion;
+    @Temporal(TemporalType.DATE)
+    public Date fechaInicio;
+    @Temporal(TemporalType.DATE)
+    public Date fechaFin;
+    
+    @Column(name="Propuesta_idPropuesta")
+    private Long idPropuesta;
+    
+    
+    
+    public String Departamento;
+    public ArrayList numeroFases;   
     public ArrayList aspirantes;
     public ArrayList finalistas;
-    public Puesto propuesta;
-    Evaluacion evaluar;
-    @Id
-    private Long id;
+    public PropuestaEmpleo propuesta;
+    public Evaluacion evaluar;
+    
 
-    public Reclutar(Puesto propuesta) {
+    public Reclutar() {
         this.fechaContratacion = new Date();
         this.fechaInicio = new Date();
         this.fechaFin = new Date();
         this.Departamento = "";
         this.numeroFases = new ArrayList<Integer>();
-        this.propuesta = propuesta;
+        
+        Conexion c = Conexion.getConexion();       
+        JpaControllerPropuesta p = new JpaControllerPropuesta(c.getEMF());
+        AdaptadorDepartamentos d = new AdaptadorDepartamentos();
+        
+        this.propuesta = p.findPropuestaEmpleo(idPropuesta);
+        this.Departamento = d.getDepartamento(propuesta.getIdDepartamento()).getNombre();
     }
 
-    
-    
     public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
@@ -78,7 +103,7 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     }
 
     public void setPropuesta(Puesto propuesta) {
-        this.propuesta = propuesta;
+        this.propuesta = (PropuestaEmpleo) propuesta;
     }
     
     public void setAspirante(Aspirantes aspirante){
@@ -131,10 +156,10 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     }
     
     
-
     @Override
     public void contratar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AdaptadorContratarEmpleado contratar = new AdaptadorContratarEmpleado();
+        contratar.contratarEmpleado(id, idPropuesta, idPropuesta, 0);
     }
 
     @Override
@@ -143,8 +168,34 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     }
 
     @Override
-    public ArrayList obtenerFinalistas() {
-        return finalistas;
+    public void setEvaluacion(Evaluacion evaluacion) {
+        this.evaluar = evaluacion;
+    }
+
+    @Override
+    public void cargarAspirantes() {
+        Conexion c = Conexion.getConexion();
+        JpaControllerAspirantes a = new JpaControllerAspirantes(c.getEMF());
+        aspirantes=(ArrayList) a.findAspirantesEntities();
+    }
+
+    @Override
+    public void cargarPuesto() {
+        Conexion con = Conexion.getConexion();
+        JpaControllerPropuesta p = new JpaControllerPropuesta(con.getEMF()); 
+        propuesta=p.findPropuestaEmpleo(idPropuesta);
+    }
+
+    @Override
+    public void cargarFases() {
+        Conexion con = Conexion.getConexion();
+        JpaControllerFasesDeReclutamiento f = new JpaControllerFasesDeReclutamiento(con.getEMF()); 
+        numeroFases=f.obtenerFasesDeReclutamiento(id);
+    }  
+    
+    @Override
+    public IteradorAspirantes obtenerFinalistas() {
+         return new IteradorAspirantes(finalistas);
     }
 
     @Override
@@ -153,36 +204,26 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     }
 
     @Override
-    public void setEvaluacion(Evaluacion evaluacion) {
-        this.evaluar = evaluacion;
-    }
-
-    @Override
-    public Iterador createIteradorFase(ArrayList fase) {
+    public Iterator crearIterador() {
         return new IteradorAspirantes(aspirantes);
-    }
-
-    @Override
-    public void cargarAspirantes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cargarPuesto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cargarFases() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }   
+    
+    //BD
+    
     public Long getId() {
         return id;
+    }
+
+    public Long getIdPropuesta() {
+        return idPropuesta;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    public void setIdPropuesta(Long idPropuesta) {
+        this.idPropuesta = idPropuesta;
+    }
+
 }

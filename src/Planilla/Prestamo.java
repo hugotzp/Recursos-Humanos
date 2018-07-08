@@ -45,6 +45,7 @@ public class Prestamo implements Serializable,VariacionSalarial {
     private Long Pago_idPago;
     
     public Prestamo(){
+        this.id = 0L;
         this.TotalPrestamo = 0;
         this.NumeroPagos = 0;
         this.Total = 0;
@@ -125,6 +126,7 @@ public class Prestamo implements Serializable,VariacionSalarial {
     @Override
     public float calcularTotal() {
         float totalAPagar=0;
+        if(TotalPrestamo!=0 && NumeroPagos!= 0)
         totalAPagar = TotalPrestamo / NumeroPagos;
         Total = totalAPagar;
         return totalAPagar;

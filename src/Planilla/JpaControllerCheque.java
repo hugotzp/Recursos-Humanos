@@ -34,7 +34,8 @@ public class JpaControllerCheque implements Serializable {
     public Cheque findFormaPago(Long id){
         EntityManager em = getEntityManager();
         TypedQuery<Cheque> query = em.createNamedQuery("ChequeTrabajador",Cheque.class);
-        return query.setParameter("idPago",id).getResultList().get(0);
+        List<Cheque> lista = query.setParameter("idPago",id).getResultList();
+        return lista.get(lista.size()-1);
     }
 
     public void create(Cheque cheque) {

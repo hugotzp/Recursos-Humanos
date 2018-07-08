@@ -29,14 +29,14 @@ public class IteradorPlanilla implements Iterator{
     public PagoTrabajador getNext(){
         if(hasMore()){
             posicionActual++;
-            return Trabajadores.get(posicionActual);
+            return Trabajadores.get(posicionActual-1);
         }else{
             return null;
         }
     }
     
     public boolean hasMore(){
-        return posicionActual <= Trabajadores.size();
+        return posicionActual < Trabajadores.size();
     }
     
     public void reset(){

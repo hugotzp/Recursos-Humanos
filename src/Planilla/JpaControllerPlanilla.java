@@ -38,7 +38,8 @@ public class JpaControllerPlanilla implements Serializable {
         Query query = em.createNamedQuery("encontrarPlanilla",PlanillaDepartamento.class);
         query.setParameter("idDepartamento", idDepartamento);
         query.setParameter("pMes", fecha);
-        return (PlanillaDepartamento) query.getSingleResult();
+        List lista = query.getResultList();
+        return (PlanillaDepartamento) lista.get(lista.size()-1);
     }
 
     public void create(PlanillaDepartamento planillaDepartamento) {

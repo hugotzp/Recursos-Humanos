@@ -16,15 +16,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Hugo
  */
-public class ComponenteTablaPlanillaNueva extends AbstractTableModel {
+public class ModeloTablaPlanillaNueva extends AbstractTableModel {
     private ArrayList<String> nombreColumnas;
     private ArrayList<Class> clasesColumnas;
     private Vector datos;
     
-    public ComponenteTablaPlanillaNueva(){
+    public ModeloTablaPlanillaNueva(PlanillaEmpresa empresa){
         super();
         datos = new Vector();
-        PlanillaEmpresa empresa = new PlanillaEmpresa();
         empresa.setAdaptadorDepartamentos(new Organizacion());
         empresa.crearNuevaPlanillaEmpresa();
         nombreColumnas = new ArrayList<>();
@@ -134,17 +133,17 @@ public class ComponenteTablaPlanillaNueva extends AbstractTableModel {
         Data dato = (Data) datos.elementAt(row);
         switch(col){
             case 6:
-                dato.getDato(FabricaVariacionesSalariales.bonificacion).buildPart(Bonificacion.pValor, value);
+                dato.getDato(FabricaVariacionesSalariales.bonificacion).buildPart(ConstructorBonificacion.pValorBono, value);
                 break;
             case 7:
-                dato.getDato(FabricaVariacionesSalariales.horasExtra).buildPart(HorasExtra.pNumeroHorasExtra, value);
-                dato.getDato(FabricaVariacionesSalariales.igss).buildPart(IGSS.pHorasExtra, dato.getDato(FabricaVariacionesSalariales.horasExtra).getVariacion().calcularTotal());
+                dato.getDato(FabricaVariacionesSalariales.horasExtra).buildPart(ConstructorHorasExtra.pNumeroHorasExtra, value);
+                dato.getDato(FabricaVariacionesSalariales.igss).buildPart(ConstructorIgss.pHorasExtra, dato.getDato(FabricaVariacionesSalariales.horasExtra).getVariacion().calcularTotal());
                 break;
             case 10:
-                dato.getDato(FabricaVariacionesSalariales.prestamo).buildPart(Prestamo.pTotalPrestamo, value);
+                dato.getDato(FabricaVariacionesSalariales.prestamo).buildPart(ConstructorPrestamo.pTotalPrestamo, value);
                 break;
             case 11:
-                dato.getDato(FabricaVariacionesSalariales.prestamo).buildPart(Prestamo.pNumeroPagos, value);
+                dato.getDato(FabricaVariacionesSalariales.prestamo).buildPart(ConstructorPrestamo.pNumeroPagos, value);
                 break;
         }
         fireTableDataChanged();
@@ -207,6 +206,7 @@ public class ComponenteTablaPlanillaNueva extends AbstractTableModel {
         
         
         public float getTotalPagar(){
+            empleado.calculartotalPagar();
             return empleado.getTotalAPagar();
         }
         

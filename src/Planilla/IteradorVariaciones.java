@@ -30,14 +30,14 @@ public class IteradorVariaciones implements Iterator{
     public VariacionSalarial getNext(){
         if(hasMore()){
             posicionActual++;
-            return Variaciones.get(posicionActual);
+            return Variaciones.get(posicionActual-1);
         }else{
             return null;
         }
     }
     
     public boolean hasMore(){
-        return posicionActual <= Variaciones.size();
+        return posicionActual < Variaciones.size();
     }
     
     public void reset(){

@@ -34,7 +34,8 @@ public class JpaControllerNotaDebito implements Serializable {
     public NotaDebito findFormaPago(Long id){
         EntityManager em = getEntityManager();
         TypedQuery<NotaDebito> query = em.createNamedQuery("NotaDebitoTrabajador",NotaDebito.class);
-        return query.setParameter("idPago",id).getResultList().get(0);
+        List<NotaDebito> lista = query.setParameter("idPago",id).getResultList();
+        return lista.get(lista.size()-1);
     }
 
     public void create(NotaDebito notaDebito) {

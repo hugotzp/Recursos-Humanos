@@ -47,11 +47,12 @@ public class IGSS implements Serializable,VariacionSalarial {
     private float Total;
     
     public IGSS(){
+        this.id = 0L;
         this.salarioBase = 0;
         this.horaExtra = 0;
         this.Total = 0;
         this.Pago_idPago = 0L;
-        this.porcentaje = (float)2.83;
+        this.porcentaje = (float)0.283;
     }
 
     public Long getId() {
@@ -149,9 +150,7 @@ public class IGSS implements Serializable,VariacionSalarial {
 
     @Override
     public float modificarSalario(float sueldoActual) {
-        if(Total == 0){
-            calcularTotal();
-        }
+        calcularTotal();
         return sueldoActual - Total;
     }
     

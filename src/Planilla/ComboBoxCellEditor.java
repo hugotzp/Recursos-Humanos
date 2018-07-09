@@ -5,10 +5,17 @@
  */
 package Planilla;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author Hugo
  */
-public interface FactoryVariacionesSalariales {
-    public ConstructorVariacionSalarial crearObjeto(String tipo);
+public class ComboBoxCellEditor extends DefaultCellEditor{
+    
+  public ComboBoxCellEditor(String[] items) {
+    super(new JComboBox(items));
+  }
+
 }

@@ -42,6 +42,7 @@ public class Bonificacion implements Serializable,VariacionSalarial {
     final static public int pValor = 1;
     
      public Bonificacion(){
+        id = 0l;
         valorBono = 0;
         Pago_idPago = 0L;
     }

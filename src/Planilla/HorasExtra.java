@@ -48,6 +48,7 @@ public class HorasExtra implements Serializable,VariacionSalarial {
     private Long Pago_idPago;
     
     public HorasExtra(){
+        this.id = 0L;
         this.numeroHorasExtra = 0;
         this.salarioBase = 0;
         this.total = 0;
@@ -165,9 +166,7 @@ public class HorasExtra implements Serializable,VariacionSalarial {
 
     @Override
     public float modificarSalario(float sueldoActual) {
-        if(total ==0){
-            calcularTotal();
-        }
+        calcularTotal();
         return sueldoActual + total;
     }
     

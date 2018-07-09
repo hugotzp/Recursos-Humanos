@@ -20,30 +20,29 @@ import javax.persistence.criteria.Root;
  *
  * @author Hugo
  */
-public class JpaControllerCheque implements Serializable {
+public class JpaControllerPago implements Serializable {
 
-    public JpaControllerCheque(EntityManagerFactory emf) {
+    public JpaControllerPago(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    public List<PagoEmpleado> findPagosPlanilla(Long id){
+        EntityManager em = getEntityManager();
+        TypedQuery<PagoEmpleado> query = em.createNamedQuery("pagosPlanilla",PagoEmpleado.class);
+        return query.setParameter("idPlanilla",id).getResultList();
+    }
+    
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
-    public Cheque findFormaPago(Long id){
-        EntityManager em = getEntityManager();
-        TypedQuery<Cheque> query = em.createNamedQuery("ChequeTrabajador",Cheque.class);
-        List<Cheque> lista = query.setParameter("idPago",id).getResultList();
-        return lista.get(lista.size()-1);
-    }
 
-    public void create(Cheque cheque) {
+    public void create(PagoEmpleado pagoEmpleado) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(cheque);
+            em.persist(pagoEmpleado);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -52,19 +51,19 @@ public class JpaControllerCheque implements Serializable {
         }
     }
 
-    public void edit(Cheque cheque) throws NonexistentEntityException, Exception {
+    public void edit(PagoEmpleado pagoEmpleado) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            cheque = em.merge(cheque);
+            pagoEmpleado = em.merge(pagoEmpleado);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = cheque.getId();
-                if (findCheque(id) == null) {
-                    throw new NonexistentEntityException("The cheque with id " + id + " no longer exists.");
+                Long id = pagoEmpleado.getId();
+                if (findPagoEmpleado(id) == null) {
+                    throw new NonexistentEntityException("The pagoEmpleado with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -80,14 +79,14 @@ public class JpaControllerCheque implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cheque cheque;
+            PagoEmpleado pagoEmpleado;
             try {
-                cheque = em.getReference(Cheque.class, id);
-                cheque.getId();
+                pagoEmpleado = em.getReference(PagoEmpleado.class, id);
+                pagoEmpleado.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cheque with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The pagoEmpleado with id " + id + " no longer exists.", enfe);
             }
-            em.remove(cheque);
+            em.remove(pagoEmpleado);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -96,19 +95,19 @@ public class JpaControllerCheque implements Serializable {
         }
     }
 
-    public List<Cheque> findChequeEntities() {
-        return findChequeEntities(true, -1, -1);
+    public List<PagoEmpleado> findPagoEmpleadoEntities() {
+        return findPagoEmpleadoEntities(true, -1, -1);
     }
 
-    public List<Cheque> findChequeEntities(int maxResults, int firstResult) {
-        return findChequeEntities(false, maxResults, firstResult);
+    public List<PagoEmpleado> findPagoEmpleadoEntities(int maxResults, int firstResult) {
+        return findPagoEmpleadoEntities(false, maxResults, firstResult);
     }
 
-    private List<Cheque> findChequeEntities(boolean all, int maxResults, int firstResult) {
+    private List<PagoEmpleado> findPagoEmpleadoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Cheque.class));
+            cq.select(cq.from(PagoEmpleado.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -120,20 +119,20 @@ public class JpaControllerCheque implements Serializable {
         }
     }
 
-    public Cheque findCheque(Long id) {
+    public PagoEmpleado findPagoEmpleado(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Cheque.class, id);
+            return em.find(PagoEmpleado.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getChequeCount() {
+    public int getPagoEmpleadoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Cheque> rt = cq.from(Cheque.class);
+            Root<PagoEmpleado> rt = cq.from(PagoEmpleado.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

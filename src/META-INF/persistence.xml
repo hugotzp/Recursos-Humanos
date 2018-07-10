@@ -16,6 +16,12 @@
     <class>Estructura.Empleo</class>
     <class>Estructura.Trabajador</class>
     <class>Planilla.PlanillaDepartamento</class>
+    <class>Contratacion.Aspirantes</class>
+    <class>Contratacion.CalificacionesAspirante</class>
+    <class>Contratacion.FaseReclutamiento</class>
+    <class>Contratacion.FasesDeReclutamiento</class>
+    <class>Contratacion.PropuestaEmpleo</class>
+    <class>Contratacion.Reclutar</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/base_rrhh?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="hugo"/>

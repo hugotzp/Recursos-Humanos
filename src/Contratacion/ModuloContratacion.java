@@ -13,10 +13,14 @@ import java.util.ArrayList;
  */
 public interface ModuloContratacion {
     
-    public ArrayList obtenerReclutamientos();
+    public void obtenerReclutamientos();
     
-    public boolean guardarReclutamiento(Reclutar reclutamiento);
+    public void guardarReclutamiento(Reclutar reclutamiento);
     
     public void contratarEmpleado();
+    
+    public void crearFaseReclutamiento(String nombre);
+    
+    public void obtenerFasesReclutamientoExistentes();
     
 }

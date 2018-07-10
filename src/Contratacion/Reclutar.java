@@ -31,8 +31,8 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
             initialValue= 1
     )
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaDepartamento")
-    @Column(name="idDepartamento")
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaReclutamiento")
+    @Column(name="idReclutamiento")
     private Long id;
     
     @Temporal(TemporalType.DATE)
@@ -45,13 +45,17 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     @Column(name="Propuesta_idPropuesta")
     private Long idPropuesta;
     
-    
-    
+    @Transient
     public String Departamento;
-    public ArrayList numeroFases;   
+    @Transient
+    public ArrayList numeroFases;
+    @Transient
     public ArrayList aspirantes;
+    @Transient
     public ArrayList finalistas;
+    @Transient
     public PropuestaEmpleo propuesta;
+    @Transient
     public Evaluacion evaluar;
     
 
@@ -61,13 +65,8 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
         this.fechaFin = new Date();
         this.Departamento = "";
         this.numeroFases = new ArrayList<Integer>();
-        
-        Conexion c = Conexion.getConexion();       
-        JpaControllerPropuesta p = new JpaControllerPropuesta(c.getEMF());
-        AdaptadorDepartamentos d = new AdaptadorDepartamentos();
-        
-        this.propuesta = p.findPropuestaEmpleo(idPropuesta);
-        this.Departamento = d.getDepartamento(propuesta.getIdDepartamento()).getNombre();
+        this.aspirantes = new ArrayList();
+        this.finalistas = new ArrayList();
     }
 
     public void setFechaContratacion(Date fechaContratacion) {
@@ -158,8 +157,12 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     
     @Override
     public void contratar() {
+        
+    }
+    
+    public void contratar(Aspirantes contratado, float salario){
         AdaptadorContratarEmpleado contratar = new AdaptadorContratarEmpleado();
-        contratar.contratarEmpleado(id, idPropuesta, idPropuesta, 0);
+        contratar.contratarEmpleado(contratado.getIdPersona(), propuesta.getIdEmpleo(), propuesta.getIdDepartamento(), salario);
     }
 
     @Override
@@ -176,13 +179,13 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     public void cargarAspirantes() {
         Conexion c = Conexion.getConexion();
         JpaControllerAspirantes a = new JpaControllerAspirantes(c.getEMF());
-        aspirantes=(ArrayList) a.findAspirantesEntities();
+        this.aspirantes=a.getAspirantesReclutamiento(id);
     }
 
     @Override
     public void cargarPuesto() {
         Conexion con = Conexion.getConexion();
-        JpaControllerPropuesta p = new JpaControllerPropuesta(con.getEMF()); 
+        JpaControllerPropuestaEmpleo p = new JpaControllerPropuestaEmpleo(con.getEMF()); 
         propuesta=p.findPropuestaEmpleo(idPropuesta);
     }
 
@@ -195,7 +198,8 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     
     @Override
     public IteradorAspirantes obtenerFinalistas() {
-         return new IteradorAspirantes(finalistas);
+        
+         return new IteradorAspirantes(evaluar.seleccionarAspirantes());
     }
 
     @Override

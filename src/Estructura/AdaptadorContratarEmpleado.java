@@ -15,19 +15,20 @@ public class AdaptadorContratarEmpleado {
     private ContratacionEmpleados medioContratacion;
     private AdministradorEmpleos admonEmpleos;
     
-    public void AdaptadorContratarEmpleo(){
+    public AdaptadorContratarEmpleado(){
         Conexion c = Conexion.getConexion();       
         medioContratacion = new JpaControllerTrabajador(c.getEMF());
         admonEmpleos = new JpaControllerEmpleo(c.getEMF());
     }
     
-    public int guardarEmpleo(String nombre) {
-    
-        return admonEmpleos.guardarEmpleo(nombre);
+    public Long guardarEmpleo(String nombre) {
+        Empleo ed = admonEmpleos.Existe(nombre);
+        if(ed!=null) return ed.getId() ;
+        else return admonEmpleos.guardarEmpleo(nombre);
         
     }
     
-    public String getEmpleo(int id) {
+    public String getEmpleo(Long id) {
         return admonEmpleos.getEmpleo(id);
     }
     

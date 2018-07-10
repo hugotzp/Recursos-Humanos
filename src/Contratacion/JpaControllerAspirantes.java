@@ -8,11 +8,13 @@ package Contratacion;
 import Contratacion.exceptions.NonexistentEntityException;
 import Contratacion.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -138,6 +140,13 @@ public class JpaControllerAspirantes implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public ArrayList getAspirantesReclutamiento(Long idReclutamiento){
+        EntityManager em = getEntityManager();
+        TypedQuery<Aspirantes> query = em.createNamedQuery("buscarAspirantesReclutamiento",Aspirantes.class);
+        query.setParameter("idAspirante", idReclutamiento);
+        return (ArrayList) query.getResultList();
     }
     
 }

@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -144,7 +145,7 @@ public class JpaControllerEmpleo implements Serializable, AdministradorEmpleos {
     }
 
     @Override
-    public int guardarEmpleo(String nombre) {
+    public Long guardarEmpleo(String nombre) {
         
         Empleo e = new Empleo();
         e.setNombre(nombre);
@@ -155,20 +156,32 @@ public class JpaControllerEmpleo implements Serializable, AdministradorEmpleos {
             Logger.getLogger(JpaControllerEmpleo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return e.getId().intValue();
+        return e.getId();
         
     }
 
     @Override
-    public String getEmpleo(int id) {
+    public String getEmpleo(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Empleo.class, id).getNombre();
         } finally {
             em.close();
         }
-        
-        
     }
+    
+    @Override
+    public Empleo Existe(String nombre){
+        EntityManager em = getEntityManager();
+        TypedQuery<Empleo> query = em.createNamedQuery("depExiste",Empleo.class);
+        query.setParameter("nombre", nombre);
+        List<Empleo> dep = query.getResultList();
+        
+        if(dep.size()>0)
+            return dep.get(0);
+        else
+            return null;
+    }
+
     
 }

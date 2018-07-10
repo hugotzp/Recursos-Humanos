@@ -6,7 +6,6 @@
 package Contratacion;
 
 import Contratacion.exceptions.NonexistentEntityException;
-import Contratacion.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,11 +17,11 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
-public class JpaControllerPropuesta implements Serializable {
+public class JpaControllerPropuestaEmpleo implements Serializable {
 
-    public JpaControllerPropuesta(EntityManagerFactory emf) {
+    public JpaControllerPropuestaEmpleo(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,18 +30,13 @@ public class JpaControllerPropuesta implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(PropuestaEmpleo propuestaEmpleo) throws PreexistingEntityException, Exception {
+    public void create(PropuestaEmpleo propuestaEmpleo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(propuestaEmpleo);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findPropuestaEmpleo(propuestaEmpleo.getId()) != null) {
-                throw new PreexistingEntityException("PropuestaEmpleo " + propuestaEmpleo + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();

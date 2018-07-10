@@ -9,7 +9,6 @@ package Contratacion;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 /**
@@ -18,7 +17,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="Propuesta")
-public class PropuestaEmpleo implements Puesto,Serializable{
+public class PropuestaEmpleo implements Serializable,Puesto{
     private static final long serialVersionUID = 1L;
     @TableGenerator(
             name="secuenciaPropuesta",
@@ -34,24 +33,50 @@ public class PropuestaEmpleo implements Puesto,Serializable{
     @Column(name="Departamento_idDepartamento")
     private Long idDepartamento;
     
+    @Column(name="Descripcion")
     public String Descripcion;
+    @Column(name="Requisitos")
     public String Requisitos;
+    @Column(name="SalarioPropuesto")
     public float Salario;
+        
+    @Transient
+    public String NombreEmpleo;
     
-    public String Puesto;
+    @Transient
+    private String Departamento;
+    
+    public PropuestaEmpleo(){
+        this.id = 0L;
+        this.idEmpleo = 0L;
+        this.idDepartamento = 0L;
+        this.Descripcion = "";
+        this.Requisitos = "";
+        this.Salario = (float)0;
+    }
     
     
-    
+
+
+    public String getPuesto() {
+        return NombreEmpleo;
+    }
+
+    public void setPuesto(String Puesto) {
+        this.NombreEmpleo = Puesto;
+    }
     
     @Override
     public void setNombre(String nombre) {
-        this.Puesto=nombre;
+        this.NombreEmpleo=nombre;
     }
 
     @Override
     public String getNombre() {
-        return Puesto;
+        return NombreEmpleo;
     }
+    
+    
 
     @Override
     public void setDescripcion(String descripcion) {
@@ -95,6 +120,7 @@ public class PropuestaEmpleo implements Puesto,Serializable{
         this.idEmpleo = idEmpleo;
     }
 
+
     public void setIdDepartamento(Long idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
@@ -111,6 +137,7 @@ public class PropuestaEmpleo implements Puesto,Serializable{
         return idDepartamento;
     }
     
-    
-    
+    public void obtenerNombre(){
+        // aslñdfkñlsadfñlsdmfs
+    }
 }

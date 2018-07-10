@@ -21,7 +21,7 @@ public interface PersonasInteresadas {
     
     public void setTipoProceso(boolean tipo);
     
-    public void setFasesReclutamiento(Calificacion fase);
+    public void setFaseReclutamiento(Calificacion fase);
     
     public boolean getTipoProceso();
 

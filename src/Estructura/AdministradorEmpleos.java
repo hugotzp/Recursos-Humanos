@@ -11,8 +11,10 @@ package Estructura;
  */
 public interface AdministradorEmpleos {
     
-    public int guardarEmpleo(String nombre);
+    public Long guardarEmpleo(String nombre);
     
-    public String getEmpleo(int id);
+    public String getEmpleo(Long id);
+    
+    public Empleo Existe(String nombre);
     
 }

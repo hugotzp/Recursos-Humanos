@@ -16,8 +16,9 @@ import java.util.Date;
  */
 public interface Calificacion {
 
-
     public void setNumeroFase(int fase); 
+    
+    public void setNombreFase(String nombre);
 
     public void setPuntuacionDesempeño(int valor);  
 
@@ -27,6 +28,8 @@ public interface Calificacion {
     
     public int getNumeroFase();
     
+    public String getNombreFase();
+    
     public int getPuntuacionDesempeño();
         
     public Date getFechaInicio();
@@ -34,6 +37,5 @@ public interface Calificacion {
     public Date getFechaFin();
     
     public Object getPropiedad(int tipo);
-
 
 }

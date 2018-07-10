@@ -17,8 +17,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 
 /**
@@ -27,6 +29,7 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name="Aspirante")
+@NamedQuery(name="buscarAspirantesReclutamiento",query="SELECT asp FROM Aspirantes asp WHERE asp.idReclutamiento = :id")
 public class Aspirantes implements PersonasInteresadas,IterableCollection,Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -49,9 +52,18 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     private Long idReclutamiento;
     
     
-    
+    @Transient
     public ArrayList<Calificacion> fases;
+    @Transient
     public Persona persona;
+    
+    public Aspirantes(){
+        id = 0L;
+        enProceso = false;
+        salarioEsperado = 0;
+        idPersona = 0L;
+        idReclutamiento = 0L;
+    }
     
     public Aspirantes(Persona p) {
        this.persona = p;
@@ -89,7 +101,7 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     }
 
     @Override
-    public void setFasesReclutamiento(Calificacion fase) {
+    public void setFaseReclutamiento(Calificacion fase) {
         this.fases.add(fase);
     }
 
@@ -106,8 +118,8 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     @Override
     public void cargarFaseReclutamiento() {
         Conexion c = Conexion.getConexion(); 
-        JpaControllerCalificacionesAspirantes calificacion = new JpaControllerCalificacionesAspirantes(c.getEMF());
-        fases=calificacion.ObtenerFasesAspirante(idPersona);
+        JpaControllerCalificacionesAspirante calificacion = new JpaControllerCalificacionesAspirante(c.getEMF());
+        fases.addAll(calificacion.ObtenerFasesAspirante(idPersona));
     }
 
     @Override
@@ -124,6 +136,10 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     
     //BD
    
+    public boolean isEnProceso() {
+        return enProceso;
+    }
+
     public Long getId() {
         return id;
     }

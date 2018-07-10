@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import Estructura.AdministradorDepartamentos;
 import Estructura.Departamentos;
 import Estructura.JpaControllerDepartamentos;
+import Estructura.Organizacion;
 import java.util.ArrayList;
 
 /**
@@ -18,14 +19,16 @@ import java.util.ArrayList;
 public class AdaptadorDepartamentos {
     private AdministradorDepartamentos admonDepartamentos;
     
-    public AdaptadorDepartamentos(){
-        Conexion c = Conexion.getConexion();       
-        admonDepartamentos = (AdministradorDepartamentos) new JpaControllerDepartamentos(c.getEMF());
+    public AdaptadorDepartamentos(){     
+        admonDepartamentos = new Organizacion();
     }
     
     public Departamentos getDepartamento(Long id){
-        
         return (Departamentos) admonDepartamentos.getDepartamento(id);
+    }
+    
+    public ArrayList<Departamentos> getDepartamentos(){
+        return admonDepartamentos.getIdDepartamentos();
     }
     
 }

@@ -24,13 +24,6 @@ public class ModeloTablaPropuestas extends AbstractTableModel {
             Data d = new Data(pe, con.obtenerDepartamento(pe.getIdDepartamento()), con.obtenerEmpleo(pe.getIdEmpleo()));
             datos.add(d);
         }
-        nombreColumnas.add("No.");
-        clasesColumnas.add(String.class);
-        nombreColumnas.add("Departamento");
-        clasesColumnas.add(String.class);
-        nombreColumnas.add("Empleo");
-        clasesColumnas.add(String.class);
-        nombreColumnas.add("Salario Propuesto");
     }
     
     
@@ -38,37 +31,17 @@ public class ModeloTablaPropuestas extends AbstractTableModel {
     
     @Override
     public int getRowCount() {
-        return datos.size();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getColumnCount() {
-        return nombreColumnas.size();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object getValueAt(int row, int col) {
-        Object retornar = null;
-        Data d = (Data) datos.get(row);
-        switch(col){
-            case 0:
-                retornar = row +1;
-                break;
-            case 1:
-                retornar = d.getDepartamento();
-                break;
-            case 2:
-                retornar = d.getEmpleo();
-                break;
-            case 3:
-                retornar = d.getPropuesta().getSalario();
-                break;
-        }
-        return retornar;
-    }
-    
-    public Long obtenerIdPropuesta(int row){
-        return ((PropuestaEmpleo)datos.get(row)).getId();
+    public Object getValueAt(int i, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     class Data{

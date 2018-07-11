@@ -154,8 +154,10 @@ public class CalificacionesAspirante implements Calificacion,Serializable{
         return retornar;
     }
     
-    public void obtenerDatosBae(){
-        
+    public void obtenerDatosBase(){
+        JpaControllerFaseReclutamiento jpa = new JpaControllerFaseReclutamiento(Conexion.Conexion.getConexion().getEMF());
+        FaseReclutamiento f = jpa.findFaseReclutamiento(idFase);
+        this.nombreFase = f.getNombre();
     }
 
     

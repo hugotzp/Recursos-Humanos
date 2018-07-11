@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -20,9 +21,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Edwin Chocoy
  */
-public class ValorDelPermisoJpaController implements Serializable {
+public class JpaControllerValorDelPermiso implements Serializable {
 
-    public ValorDelPermisoJpaController(EntityManagerFactory emf) {
+    public JpaControllerValorDelPermiso(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -138,6 +139,20 @@ public class ValorDelPermisoJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public ValorDelPermiso existe(Long idF,Long idP,Long idR){
+        EntityManager em = getEntityManager();
+        TypedQuery<ValorDelPermiso> query = em.createNamedQuery("valorPermisoExiste",ValorDelPermiso.class);
+        query.setParameter("idF",idF);
+        query.setParameter("idP",idP);
+        query.setParameter("idR",idR);       
+        List<ValorDelPermiso> vf = query.getResultList();
+        
+        if(vf.size()>0)
+            return vf.get(0);
+        else
+            return null;
     }
     
 }

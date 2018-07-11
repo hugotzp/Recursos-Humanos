@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
 
 /**
@@ -19,25 +20,35 @@ import javax.persistence.TableGenerator;
  * @author Edwin Chocoy
  */
 @Entity
+@NamedQuery(name="valorPermisoExiste",query="SELECT v FROM ValorDelPermiso v WHERE v.idFormulario = :idF AND v.idPermiso = :idP AND v.idRol = :idR")
 public class ValorDelPermiso implements Serializable {
-
-    @Id
-    private Long id;
-
-    private static final long serialVersionUID = 1L;
-
     
-    @Column(name="idPermiso")
+    private static final long serialVersionUID = 1L;
+    @TableGenerator(
+            name="secuenciaValorPermiso",
+            allocationSize = 1,
+            initialValue= 1
+    )
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaValorPermiso")
+    @Column(name="idValorDelPermiso")
+    private Long id;
+    
+    @Column(name="Permiso_idPermiso")
     private Long idPermiso;
     
-    @Column(name="idFormulario")
+    @Column(name="Formulario_idFormulario")
     private Long idFormulario;
     
-    @Column(name="idRol")
+    @Column(name="Rol_idRol")
     private Long idRol;
     
     private boolean acceso;
 
+    public ValorDelPermiso(){
+        this.id=0L;
+    }
+    
     public Long getIdPermiso() {
         return idPermiso;
     }
@@ -78,5 +89,9 @@ public class ValorDelPermiso implements Serializable {
         this.id = id;
     }
     
+    @Override
+    public String toString(){
+        return (id.toString()+idPermiso.toString()+idRol.toString()+idFormulario.toString());
+    }
     
 }

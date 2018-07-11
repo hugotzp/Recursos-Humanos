@@ -63,6 +63,7 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
         salarioEsperado = 0;
         idPersona = 0L;
         idReclutamiento = 0L;
+        fases = new ArrayList<>();
     }
     
     public Aspirantes(Persona p) {
@@ -126,12 +127,24 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     public void cargarPersona() {
         ContratacionAdministradorPersona adaptador = new ContratacionAdministradorPersona();
         persona=adaptador.getPersona(idPersona);
-        
     }
     
     @Override
     public Iterator crearIterador() {
         return new IteradorFases(this);
+    }
+    
+    public void guardarCalificaciones() throws Exception{
+        JpaControllerCalificacionesAspirante con = new JpaControllerCalificacionesAspirante(Conexion.getConexion().getEMF());
+        for(Calificacion c : fases){
+            CalificacionesAspirante calificacion = (CalificacionesAspirante) c;
+            if(calificacion.getId()>0){
+                con.edit(calificacion);
+            }else{
+                calificacion.setIdAspiranteAsociado(id);
+                con.create(calificacion);
+            }
+        }
     }
     
     //BD

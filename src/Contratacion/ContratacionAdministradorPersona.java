@@ -17,7 +17,7 @@ import Personas.*;
 public class ContratacionAdministradorPersona {
     private AdaptadorContratacion adaptador;
     
-    public void AdaptadorContratarEmpleo(){
+    public ContratacionAdministradorPersona(){
         Conexion c = Conexion.getConexion();       
         adaptador = new JpaController_PersonalContratacion(c.getEMF());
     }

@@ -5,17 +5,25 @@
  */
 package Contratacion;
 
+import java.util.Date;
+
 /**
  *
  * @author Hugo
  */
 public class VentanaCrearReclutamiento extends javax.swing.JPanel {
-
+    ModeloTablaPropuestas mp ;
+    ModeloTablaSeleccionarFases mf ;
     /**
      * Creates new form VentanaCrearReclutamiento
      */
     public VentanaCrearReclutamiento() {
         initComponents();
+        Contratacion con = new Contratacion();
+        mp = new ModeloTablaPropuestas(con);
+        mf = new ModeloTablaSeleccionarFases(con);
+        tabla_Fases.setModel(mf);
+        tabla_Propuestas.setModel(mp);
     }
 
     /**
@@ -58,6 +66,11 @@ public class VentanaCrearReclutamiento extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tabla_Fases);
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,6 +99,18 @@ public class VentanaCrearReclutamiento extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Reclutar reclutamiento = new Reclutar();
+        reclutamiento.setFechaInicio(new Date());
+        reclutamiento.setIdPropuesta(mp.obtenerIdPropuesta());
+        Contratacion con = new Contratacion();
+        con.guardarReclutamiento(reclutamiento);
+        for(Long id : mf.getIdFasesSeleccionadas()){
+            reclutamiento.setNumeroFaseReclutamiento(id);
+        }
+        reclutamiento.guardarFases();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

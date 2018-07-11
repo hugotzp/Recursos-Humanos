@@ -16,7 +16,7 @@ public class Prueba extends javax.swing.JFrame {
      */
     public Prueba() {
         initComponents();
-        VentanaAsignacionAspirante v = new VentanaAsignacionAspirante();
+        VentanaAsignarCalificaciones v = new VentanaAsignarCalificaciones();
         v.setSize(Panel.getSize());
         v.setLocation(0, 0);
         Panel.add(v);

@@ -29,6 +29,7 @@ public class ModeloTablaCalificaciones extends AbstractTableModel{
     }
     
     public void LlenarTabla(Reclutar reclutamiento){
+        this.aspirantes = new ArrayList<>();
         this.nombreColumnas = new ArrayList<>();
         this.clasesColumnas = new ArrayList<>();
         this.nombreColumnas.add("Nombre");
@@ -43,6 +44,11 @@ public class ModeloTablaCalificaciones extends AbstractTableModel{
             this.clasesColumnas.add(Integer.class);
         }
         this.aspirantes = reclutamiento.getAspirantes();
+        System.out.println("Cantidadasp: "+aspirantes.size());
+        for(Aspirantes as : this.aspirantes){
+            as.cargarFaseReclutamiento();
+            as.cargarPersona();
+        }
         fireTableStructureChanged();
     }
 
@@ -56,6 +62,16 @@ public class ModeloTablaCalificaciones extends AbstractTableModel{
         return nombreColumnas.size();
     }
 
+    @Override
+    public String getColumnName(int col){
+        return this.nombreColumnas.get(col);
+    }
+    
+    @Override
+    public Class getColumnClass(int col){
+        return this.clasesColumnas.get(col);
+    }
+    
     @Override
     public Object getValueAt(int row, int col) {
         Object retornar = null;
@@ -71,5 +87,22 @@ public class ModeloTablaCalificaciones extends AbstractTableModel{
                 retornar = ((CalificacionesAspirante)asp.getFasesReclutamiento().get(col-2)).getDesempeño();
         }
         return retornar;
+    }
+    
+    @Override
+    public void setValueAt(Object value, int row, int col){
+        Aspirantes asp = aspirantes.get(row);
+        if(col>1){
+            ((CalificacionesAspirante)asp.getFasesReclutamiento().get(col-2)).setDesempeño((int) value);
+        }
+    }
+    
+    @Override
+    public boolean isCellEditable(int row,int col){
+        if(col>1){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

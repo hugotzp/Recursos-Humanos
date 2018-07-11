@@ -121,6 +121,7 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
         Conexion c = Conexion.getConexion(); 
         JpaControllerCalificacionesAspirante calificacion = new JpaControllerCalificacionesAspirante(c.getEMF());
         fases.addAll(calificacion.ObtenerFasesAspirante(idPersona));
+        System.out.println("Cantidad Fases" +fases.size());
     }
 
     @Override

@@ -251,6 +251,17 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
         }
     }
     
+    public void guardarCalificaciones(){
+        for(Object o: aspirantes){
+            try {
+                Aspirantes asp = (Aspirantes) o;
+                asp.guardarCalificaciones();
+            } catch (Exception ex) {
+                Logger.getLogger(Reclutar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     @Override
     public String toString(){
         return propuesta.getPuesto()+"("+propuesta.getDepartamento()+")";

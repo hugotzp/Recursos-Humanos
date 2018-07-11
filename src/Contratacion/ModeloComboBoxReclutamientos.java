@@ -22,7 +22,6 @@ public class ModeloComboBoxReclutamientos extends AbstractListModel implements C
     public ModeloComboBoxReclutamientos(ArrayList<Reclutar> rec, JDateChooser fecha){
         this.reclutamientos = rec;
         this.fecha = fecha;
-        if(rec.size()>0) setSelectedItem(rec.get(0));
     }
 
     @Override
@@ -44,6 +43,10 @@ public class ModeloComboBoxReclutamientos extends AbstractListModel implements C
     @Override
     public Object getSelectedItem() {
         return actual;
+    }
+    
+    public void llenarTabla(Reclutar reclutar){
+        
     }
     
 }

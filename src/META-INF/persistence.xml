@@ -2,37 +2,33 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="Recursos_HumanosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Personas.Personal</class>
-    <class>Personas.JpaController_Personal</class>
-    <class>Planilla.Bonificacion</class>
-    <class>Planilla.Prestamo</class>
-    <class>Planilla.IGSS</class>
-    <class>Planilla.HorasExtra</class>
-    <class>Planilla.Cheque</class>
-    <class>Planilla.Efectivo</class>
-    <class>Planilla.NotaDebito</class>
-    <class>Planilla.PagoEmpleado</class>
-    <class>Estructura.Departamentos</class>
-    <class>Estructura.Empleo</class>
-    <class>Estructura.Trabajador</class>
-    <class>Planilla.PlanillaDepartamento</class>
-<<<<<<< HEAD
     <class>Contratacion.Aspirantes</class>
     <class>Contratacion.CalificacionesAspirante</class>
     <class>Contratacion.FaseReclutamiento</class>
     <class>Contratacion.FasesDeReclutamiento</class>
     <class>Contratacion.PropuestaEmpleo</class>
     <class>Contratacion.Reclutar</class>
-=======
-    <class>Usuarios.ValorDelPermiso</class>
+    <class>Estructura.Departamentos</class>
+    <class>Estructura.Empleo</class>
+    <class>Estructura.Trabajador</class>
+    <class>Personas.Personal</class>
+    <class>Planilla.Bonificacion</class>
+    <class>Planilla.Cheque</class>
+    <class>Planilla.Efectivo</class>
+    <class>Planilla.HorasExtra</class>
+    <class>Planilla.IGSS</class>
+    <class>Planilla.NotaDebito</class>
+    <class>Planilla.PagoEmpleado</class>
+    <class>Planilla.PlanillaDepartamento</class>
+    <class>Planilla.Prestamo</class>
     <class>Usuarios.Formulario</class>
     <class>Usuarios.Paquete</class>
-    <class>Usuarios.Rol</class>
     <class>Usuarios.Permiso</class>
->>>>>>> refs/remotes/origin/master
+    <class>Usuarios.Rol</class>
+    <class>Usuarios.ValorDelPermiso</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/base_rrhh?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="edwin8998"/>
+      <property name="javax.persistence.jdbc.password" value="hugo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

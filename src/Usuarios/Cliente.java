@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 /**
  *
@@ -40,9 +41,11 @@ public class Cliente implements Usuario, Serializable{
     @Column(name="Rol_idRol")
     private Long idRol;
     
-    
+    @Transient
     public String rol;
+    @Transient
     public AdministradorPermisos administrador;
+    @Transient
     private static Usuario usuario;
             
     private void Cliente(){

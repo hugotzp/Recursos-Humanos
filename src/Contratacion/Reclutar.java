@@ -186,6 +186,11 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
         Conexion c = Conexion.getConexion();
         JpaControllerAspirantes a = new JpaControllerAspirantes(c.getEMF());
         this.aspirantes=a.getAspirantesReclutamiento(id);
+        for(Object aux:this.aspirantes){
+            Aspirantes aspirante = (Aspirantes) aux;
+            aspirante.cargarPersona();
+            aspirante.cargarFaseReclutamiento();
+        }
     }
 
     @Override

@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -43,19 +44,28 @@ public class CalificacionesAspirante implements Calificacion,Serializable{
     )
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator="secuenciaCalificacionesAspirante")
-    @Column(name="idCalificaionesAspirante")
+    @Column(name="idCalificacionesAspirante")
     private Long id;
     @Column(name="Aspirante_idAspirante")
     private Long idAspiranteAsociado;
     @Column(name = "FaseReclutamiento_idFaseReclutamiento")
     private Long idFase;
     public int numeroFase;
+    @Transient
     public String nombreFase;
     @Temporal(TemporalType.DATE)
     public Date fechaInicio;
     @Temporal(TemporalType.DATE)
     public Date fechaFin;
     public int desempeño;
+    
+    public CalificacionesAspirante(){
+        id = 0L;
+        idAspiranteAsociado = 0L;
+        idFase = 0L;
+        fechaFin = new Date();
+        fechaInicio = new Date();
+    }
 
     public Long getIdAspiranteAsociado() {
         return idAspiranteAsociado;
@@ -142,6 +152,10 @@ public class CalificacionesAspirante implements Calificacion,Serializable{
                 break;
         }
         return retornar;
+    }
+    
+    public void obtenerDatosBae(){
+        
     }
 
     

@@ -8,6 +8,7 @@ package Contratacion;
  */
 
 
+import Estructura.AdaptadorContratarEmpleado;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -45,6 +46,10 @@ public class PropuestaEmpleo implements Serializable,Puesto{
     
     @Transient
     private String Departamento;
+
+    public String getDepartamento() {
+        return Departamento;
+    } 
     
     public PropuestaEmpleo(){
         this.id = 0L;
@@ -138,6 +143,9 @@ public class PropuestaEmpleo implements Serializable,Puesto{
     }
     
     public void obtenerNombre(){
-        // aslñdfkñlsadfñlsdmfs
+        AdaptadorDepartamentos a = new AdaptadorDepartamentos();
+        this.Departamento = a.getDepartamento(idDepartamento).getNombre();
+        AdaptadorContratarEmpleado c = new AdaptadorContratarEmpleado();
+        this.NombreEmpleo = c.getEmpleo(idEmpleo);
     }
 }

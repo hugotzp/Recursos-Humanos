@@ -6,7 +6,7 @@
 package Contratacion;
 
 import Contratacion.exceptions.NonexistentEntityException;
-import Estructura.Departamentos;
+import Contratacion.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Edwin Chocoy
+ * @author Hugo
  */
 public class JpaControllerFasesDeReclutamiento implements Serializable {
 
@@ -33,13 +33,18 @@ public class JpaControllerFasesDeReclutamiento implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(FasesDeReclutamiento fasesDeReclutamiento) {
+    public void create(FasesDeReclutamiento fasesDeReclutamiento) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(fasesDeReclutamiento);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findFasesDeReclutamiento(fasesDeReclutamiento.getId()) != null) {
+                throw new PreexistingEntityException("FasesDeReclutamiento " + fasesDeReclutamiento + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -57,7 +62,7 @@ public class JpaControllerFasesDeReclutamiento implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = fasesDeReclutamiento.getIdReclutamiento();
+                Long id = fasesDeReclutamiento.getId();
                 if (findFasesDeReclutamiento(id) == null) {
                     throw new NonexistentEntityException("The fasesDeReclutamiento with id " + id + " no longer exists.");
                 }
@@ -78,7 +83,7 @@ public class JpaControllerFasesDeReclutamiento implements Serializable {
             FasesDeReclutamiento fasesDeReclutamiento;
             try {
                 fasesDeReclutamiento = em.getReference(FasesDeReclutamiento.class, id);
-                fasesDeReclutamiento.getIdReclutamiento();
+                fasesDeReclutamiento.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The fasesDeReclutamiento with id " + id + " no longer exists.", enfe);
             }
@@ -137,13 +142,13 @@ public class JpaControllerFasesDeReclutamiento implements Serializable {
         }
     }
     
-    public ArrayList obtenerFasesDeReclutamiento(Long id){
+    public ArrayList<FasesDeReclutamiento> obtenerFasesDeReclutamiento(Long id){
         EntityManager em = getEntityManager();
         TypedQuery<FasesDeReclutamiento> query = em.createNamedQuery("obtenerFasesDeReclutamiento",FasesDeReclutamiento.class);
         query.setParameter("id", id);
         List<FasesDeReclutamiento> fases = query.getResultList();
-
-        return (ArrayList) fases;
+        System.out.println("Cantidad = " +fases.size());
+        return new ArrayList(fases);
 
     }
     

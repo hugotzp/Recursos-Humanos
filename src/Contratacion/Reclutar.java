@@ -15,6 +15,8 @@ import OtrasClases.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 /**
  *
@@ -48,7 +50,7 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     @Transient
     public String Departamento;
     @Transient
-    public ArrayList numeroFases;
+    public ArrayList<FasesDeReclutamiento> FasesRelacionadas;
     @Transient
     public ArrayList aspirantes;
     @Transient
@@ -57,6 +59,8 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     public PropuestaEmpleo propuesta;
     @Transient
     public Evaluacion evaluar;
+    @Transient
+    public ArrayList numeroFases;
     
 
     public Reclutar() {
@@ -65,8 +69,10 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
         this.fechaFin = new Date();
         this.Departamento = "";
         this.numeroFases = new ArrayList<Integer>();
+        this.FasesRelacionadas = new ArrayList<FasesDeReclutamiento>();
         this.aspirantes = new ArrayList();
         this.finalistas = new ArrayList();
+        this.idPropuesta = 0L;
     }
 
     public void setFechaContratacion(Date fechaContratacion) {
@@ -166,8 +172,8 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     }
 
     @Override
-    public void setFaseReclutamiento(int numero) {
-        this.numeroFases.add(numero);
+    public void setFaseReclutamiento(FasesDeReclutamiento numero) {
+        this.FasesRelacionadas.add(numero);
     }
 
     @Override
@@ -187,13 +193,14 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
         Conexion con = Conexion.getConexion();
         JpaControllerPropuestaEmpleo p = new JpaControllerPropuestaEmpleo(con.getEMF()); 
         propuesta=p.findPropuestaEmpleo(idPropuesta);
+        propuesta.obtenerNombre();
     }
 
     @Override
     public void cargarFases() {
         Conexion con = Conexion.getConexion();
         JpaControllerFasesDeReclutamiento f = new JpaControllerFasesDeReclutamiento(con.getEMF()); 
-        numeroFases=f.obtenerFasesDeReclutamiento(id);
+        FasesRelacionadas=f.obtenerFasesDeReclutamiento(id);
     }  
     
     @Override
@@ -229,5 +236,33 @@ public class Reclutar implements Reclutamiento,IterableCollection,Serializable{
     public void setIdPropuesta(Long idPropuesta) {
         this.idPropuesta = idPropuesta;
     }
+    
+    public void guardarFases(){
+        JpaControllerFasesDeReclutamiento jf = new JpaControllerFasesDeReclutamiento(Conexion.getConexion().getEMF());
+        for(Object idFase : numeroFases){
+            try {
+                FasesDeReclutamiento f = new FasesDeReclutamiento();
+                f.setIdReclutamiento(id);
+                f.setIdFaseReclutamiento((Long) idFase);
+                jf.create(f);
+            } catch (Exception ex) {
+                Logger.getLogger(Reclutar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    @Override
+    public String toString(){
+        return propuesta.getPuesto()+"("+propuesta.getDepartamento()+")";
+    }
 
+    void setNumeroFaseReclutamiento(Long id) {
+        this.numeroFases.add(id);
+    }
+
+    public ArrayList<FasesDeReclutamiento> getFasesRelacionadas() {
+        return FasesRelacionadas;
+    }
+
+    
 }

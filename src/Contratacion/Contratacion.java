@@ -10,6 +10,7 @@ import Estructura.AdaptadorContratarEmpleado;
 import Estructura.Departamentos;
 import Estructura.Empleo;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +24,9 @@ public class Contratacion implements ModuloContratacion {
     public ArrayList fasesExistentes;
     public ArrayList reclutamientos;
     
-    public void Contratacion(){
+    public Contratacion(){
         this.reclutamientos = new ArrayList();
+        this.fasesExistentes = new ArrayList();
     }
     
     public String obtenerEmpleo(Long id){
@@ -41,7 +43,12 @@ public class Contratacion implements ModuloContratacion {
     public void obtenerReclutamientos() {
         Conexion con = Conexion.getConexion();
         JpaControllerReclutar re = new JpaControllerReclutar(con.getEMF());
-        this.reclutamientos = new ArrayList(re.findReclutarEntities());
+        List<Reclutar> lista = re.findReclutarEntities();
+        for(Reclutar r : lista){
+            r.cargarPuesto();
+            r.cargarFases();
+        }
+        this.reclutamientos = new ArrayList(lista);
     }
 
     @Override

@@ -33,6 +33,8 @@ public class Formulario implements Serializable {
     @Column(name="idFormulario")
     private Long id;
     private String nombre;
+    @Column(name="Paquete_idPaquete")
+    private Long idPaquete;
 
     public Long getId() {
         return id;
@@ -42,12 +44,20 @@ public class Formulario implements Serializable {
         return nombre;
     }
 
+    public Long getIdPaquete() {
+        return idPaquete;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setIdPaquete(Long idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
     @Override

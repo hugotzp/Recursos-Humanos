@@ -16,7 +16,7 @@ public interface Reclutamiento {
     
     public void contratar();
     
-    public void setFaseReclutamiento(int numero);    
+    public void setFaseReclutamiento(FasesDeReclutamiento numero);    
     
     public void setEvaluacion(Evaluacion evaluacion);
   

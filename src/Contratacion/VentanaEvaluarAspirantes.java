@@ -5,6 +5,8 @@
  */
 package Contratacion;
 
+import Estructura.AdaptadorContratarEmpleado;
+
 /**
  *
  * @author Edwin Chocoy
@@ -50,13 +52,19 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jRadioButtonPromedio = new javax.swing.JRadioButton();
         jRadioButtonFase = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonContratar = new javax.swing.JButton();
 
         buttonGroup1.add(jRadioButtonPromedio);
         buttonGroup1.add(jRadioButtonFase);
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Seleccione un reclutamiento:");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Evaluar por:");
 
         jTableFasesReclutamiento.setModel(new javax.swing.table.DefaultTableModel(
@@ -72,8 +80,11 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTableFasesReclutamiento);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Fases del Reclutamiento");
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Evaluar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +92,8 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Finalistas");
 
         jTableFinalistas.setModel(new javax.swing.table.DefaultTableModel(
@@ -96,11 +109,19 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTableFinalistas);
 
+        jRadioButtonPromedio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButtonPromedio.setText("Promedio");
 
+        jRadioButtonFase.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButtonFase.setText("Importancia Fase");
 
-        jButton2.setText("Contratar");
+        jButtonContratar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonContratar.setText("Contratar");
+        jButtonContratar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContratarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,67 +130,67 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxReclutamientos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jRadioButtonPromedio)
-                                    .addComponent(jRadioButtonFase)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
+                            .addComponent(jComboBoxReclutamientos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jRadioButtonPromedio)
+                            .addComponent(jRadioButtonFase))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                            .addComponent(jButton1)
+                            .addComponent(jButtonContratar))
+                        .addGap(101, 101, 101)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(144, 144, 144)
+                                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3))
+                            .addGap(65, 65, 65))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(33, 33, 33)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxReclutamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxReclutamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(23, 23, 23)
                         .addComponent(jRadioButtonPromedio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonFase)
-                        .addGap(2, 2, 2)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jRadioButtonFase)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(jButtonContratar)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -182,12 +203,12 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
         if(jRadioButtonFase.isSelected()){
             
             
-            PorFase porFase = new PorFase(30,(IteradorAspirantes) reclutamiento.crearIterador());
+            PorFase porFase = new PorFase(60,(IteradorAspirantes) reclutamiento.crearIterador());
             porFase.setFasesImportante(modeloTFaseReclutamiento.getFasesSeleccionadas());
             evaluar = new Evaluar(porFase);
            
         }else{
-            Promedio porPromedio = new Promedio(30,(IteradorAspirantes) reclutamiento.crearIterador());
+            Promedio porPromedio = new Promedio(60,(IteradorAspirantes) reclutamiento.crearIterador());
             evaluar = new Evaluar(porPromedio);
         }
         
@@ -197,11 +218,25 @@ public class VentanaEvaluarAspirantes extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButtonContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContratarActionPerformed
+        // TODO add your handling code here:
+        
+        AdaptadorContratarEmpleado adaptador = new AdaptadorContratarEmpleado();
+        Reclutar reclutamiento =(Reclutar) jComboBoxReclutamientos.getSelectedItem();
+        reclutamiento.cargarPuesto();
+        PropuestaEmpleo propuesta = (PropuestaEmpleo) reclutamiento.getPropuesta();
+        
+        adaptador.contratarEmpleado(modeloTFinalistas.getIdPersona(jTableFinalistas.getSelectedRow()), propuesta.getIdEmpleo(), propuesta.getIdDepartamento(), propuesta.getSalario());
+        
+        
+        
+    }//GEN-LAST:event_jButtonContratarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonContratar;
     private javax.swing.JComboBox<String> jComboBoxReclutamientos;
     private com.toedter.calendar.JDateChooser jDateChooserFecha;
     private javax.swing.JLabel jLabel1;

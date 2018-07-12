@@ -20,7 +20,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTablaInfoPersonal extends AbstractTableModel {
     public String[] m_colNames = {"Nombres","Apellidos","DPI","Genero","Fecha Nacimiento","Telefono"};
     Vector m_macDataVector;
-    public ArrayList<Departamentos> departamentos;
+    public ArrayList<Departamentos> departamentos = new ArrayList();
     
     public ModeloTablaInfoPersonal(ArrayList departamentos){
         

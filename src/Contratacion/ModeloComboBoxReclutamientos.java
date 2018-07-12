@@ -44,9 +44,6 @@ public class ModeloComboBoxReclutamientos extends AbstractListModel implements C
     public Object getSelectedItem() {
         return actual;
     }
-    
-    public void llenarTabla(Reclutar reclutar){
-        
-    }
+   
     
 }

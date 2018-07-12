@@ -120,7 +120,7 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     public void cargarFaseReclutamiento() {
         Conexion c = Conexion.getConexion(); 
         JpaControllerCalificacionesAspirante calificacion = new JpaControllerCalificacionesAspirante(c.getEMF());
-        fases.addAll(calificacion.ObtenerFasesAspirante(idPersona));
+        fases = new ArrayList(calificacion.ObtenerFasesAspirante(idPersona));
         System.out.println("Cantidad Fases" +fases.size());
     }
 
@@ -137,13 +137,16 @@ public class Aspirantes implements PersonasInteresadas,IterableCollection,Serial
     
     public void guardarCalificaciones() throws Exception{
         JpaControllerCalificacionesAspirante con = new JpaControllerCalificacionesAspirante(Conexion.getConexion().getEMF());
+        System.out.println("calificacion guardada");
         for(Calificacion c : fases){
             CalificacionesAspirante calificacion = (CalificacionesAspirante) c;
             if(calificacion.getId()>0){
                 con.edit(calificacion);
+                System.out.println("calificacion guardada"+calificacion.getDesempeño());
             }else{
                 calificacion.setIdAspiranteAsociado(id);
                 con.create(calificacion);
+                System.out.println("calificacion guardada"+calificacion.getDesempeño());
             }
         }
     }

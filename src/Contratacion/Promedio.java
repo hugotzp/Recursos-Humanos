@@ -44,9 +44,11 @@ public class Promedio implements FormaCalificar{
             Aspirantes aspirante = (Aspirantes) aspirantes.getNext();
             IteradorFases fases = (IteradorFases) aspirante.crearIterador();
             while(fases.hasMore()){
+                
                 aux+= fases.getNext().getPuntuacionDesempeño();
                 conteo++;
             }
+            System.out.println(aux);
             if(aux/conteo >= valorMinimo) finalistas.add(aspirante);
         }
         return finalistas;

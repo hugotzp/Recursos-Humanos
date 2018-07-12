@@ -23,16 +23,22 @@ class IteradorAspirantes implements Iterator{
     }
     
     public PersonasInteresadas getNext(){
-        if(hasMore()){
-            posicionActual++;
-            return aspirantes.get(posicionActual);
-        }else{
-            return null;
+        PersonasInteresadas obj = null;
+        if( (this.posicionActual ) < this.aspirantes.size() )
+        {
+            obj = this.aspirantes.get(this.posicionActual);
+            this.posicionActual = this.posicionActual + 1;
         }
+        return obj;
     }
     @Override
     public boolean hasMore(){
-        return posicionActual <= aspirantes.size();
+        boolean ok = false;
+        if( this.posicionActual < (this.aspirantes.size() ) )
+        {
+            ok = true;
+        }
+        return ok;
     }
     @Override
     public void reset(){

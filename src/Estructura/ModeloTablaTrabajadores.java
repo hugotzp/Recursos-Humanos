@@ -28,6 +28,7 @@ public class ModeloTablaTrabajadores extends AbstractTableModel {
     
     public void LlenarTabla(Departamentos departamento){
         //departamento.obtenerEmpleados();
+        this.trabajadores = new ArrayList();
         this.trabajadores = departamento.getPersonal();
         
         m_macDataVector.setSize(0);
